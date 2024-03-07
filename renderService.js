@@ -81,7 +81,7 @@ const renderService = (function () {
         const totalAnswers = Math.min(answerHistory.length, config.maxAnswersTracked);
         const scoreDiv = document.createElement("div");
         scoreDiv.classList.add("text-center", "mb-2");
-        scoreDiv.textContent = `${correctAnswers}/${totalAnswers}`;
+        scoreDiv.textContent = `Correct ${correctAnswers}/${totalAnswers}`;
         feedbackDiv.appendChild(scoreDiv);
     }
 
