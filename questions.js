@@ -5,12 +5,17 @@ const questions = [
     answer: "in"
   },
   {
+    sentence: "Ich gehe _____ Schule.",
+    options: ["in", "auf", "zur", "an"],
+    answer: "zur"
+  },
+  {
     sentence: "Mein Bruder arbeitet _____ einem Büro.",
     options: ["in", "auf", "zu", "an"],
     answer: "in"
   },
   {
-    sentence: "Wir fahren _____ Urlaub.",
+    sentence: "Wir fahren _____ dem Urlaub.",
     options: ["in", "auf", "zu", "im"],
     answer: "in"
   },
@@ -90,14 +95,9 @@ const questions = [
     answer: "auf"
   },
   {
-    sentence: "Ich rufe _____ meinen Eltern an.",
-    options: ["für", "bei", "an", "auf"],
-    answer: "bei"
-  },
-  {
-    sentence: "Wir gehen _____ das Konzert.",
-    options: ["in", "auf", "zu", "an"],
-    answer: "zu"
+    sentence: "Wir gehen _____ Konzert.",
+    options: ["in", "auf", "zu", "zum"],
+    answer: "zum"
   },
   {
     sentence: "Ich arbeite _____ einem Projekt.",
@@ -121,17 +121,17 @@ const questions = [
   },
   {
     sentence: "Meine Schwester reist _____ Frankreich.",
-    options: ["in", "auf", "an", "zu"],
+    options: ["in", "auf", "nach", "zu"],
     answer: "nach"
   },
   {
-    sentence: "Wir gehen _____ das Kino.",
-    options: ["in", "auf", "zu", "an"],
+    sentence: "Wir gehen _____ Kino.",
+    options: ["ins", "auf", "zu", "an"],
     answer: "ins"
   },
   {
     sentence: "Ich fahre _____ die Arbeit.",
-    options: ["in", "auf", "zu", "an"],
+    options: ["in", "auf", "zur", "an"],
     answer: "zur"
   },
   {
@@ -156,7 +156,7 @@ const questions = [
   },
   {
     sentence: "Wir gehen _____ die Bushaltestelle.",
-    options: ["in", "auf", "zu", "an"],
+    options: ["in", "auf", "zur", "an"],
     answer: "zur"
   },
   {
@@ -185,8 +185,8 @@ const questions = [
     answer: "in"
   },
   {
-    sentence: "Wir gehen _____ das Meer.",
-    options: ["in", "auf", "zu", "an"],
+    sentence: "Wir gehen _____ Meer.",
+    options: ["in", "auf", "zu", "ans"],
     answer: "ans"
   },
   {
@@ -217,7 +217,7 @@ const questions = [
   {
     sentence: "Wir gehen _____ die Apotheke.",
     options: ["in", "auf", "zu", "an"],
-    answer: "zur"
+    answer: "in"
   },
   {
     sentence: "Ich warte _____ meinen Zug.",
@@ -230,7 +230,7 @@ const questions = [
     answer: "an"
   },
   {
-    sentence: "Wir fahren _____ den Bergen.",
+    sentence: "Wir fahren _____ die Berge.",
     options: ["in", "auf", "zu", "an"],
     answer: "in"
   },
@@ -247,7 +247,7 @@ const questions = [
   {
     sentence: "Wir gehen _____ die Eisdiele.",
     options: ["in", "auf", "zu", "an"],
-    answer: "zur"
+    answer: "in"
   },
   {
     sentence: "Mein Vater arbeitet _____ einer Bank.",
@@ -382,7 +382,7 @@ const questions = [
   {
     sentence: "Wir gehen _____ das Café.",
     options: ["in", "auf", "zu", "an"],
-    answer: "ins"
+    answer: "in"
   },
   {
     sentence: "Meine Schwester arbeitet _____ einem Krankenhaus.",
@@ -401,7 +401,7 @@ const questions = [
   },
   {
     sentence: "Mein Bruder spielt _____ dem Computer.",
-    options: ["in", "auf", "an", "zu"],
+    options: ["in", "auf", "an", "am"],
     answer: "am"
   },
   {
@@ -425,11 +425,6 @@ const questions = [
     answer: "zur"
   },
   {
-    sentence: "Wir gehen _____ das Kino.",
-    options: ["in", "auf", "zu", "an"],
-    answer: "ins"
-  },
-  {
     sentence: "Mein Vater arbeitet _____ einem Büro.",
     options: ["in", "für", "an", "auf"],
     answer: "in"
@@ -438,11 +433,6 @@ const questions = [
     sentence: "Ich warte _____ den Zug.",
     options: ["für", "auf", "an", "zu"],
     answer: "auf"
-  },
-  {
-    sentence: "Wir fahren _____ die Berge.",
-    options: ["in", "auf", "zu", "an"],
-    answer: "in"
   },
   {
     sentence: "Meine Schwester arbeitet _____ einem Geschäft.",
@@ -455,8 +445,8 @@ const questions = [
     answer: "an"
   },
   {
-    sentence: "Wir sitzen _____ dem Park.",
-    options: ["in", "auf", "an", "zu"],
+    sentence: "Wir sitzen _____ Park.",
+    options: ["in", "auf", "an", "im"],
     answer: "im"
   },
   {
@@ -472,7 +462,7 @@ const questions = [
   {
     sentence: "Wir gehen _____ das Schwimmbad.",
     options: ["in", "auf", "zu", "an"],
-    answer: "ins"
+    answer: "in"
   },
   {
     sentence: "Meine Mutter arbeitet _____ einem Büro.",
@@ -517,7 +507,7 @@ const questions = [
   {
     sentence: "Wir gehen _____ das Museum.",
     options: ["in", "auf", "zu", "an"],
-    answer: "ins"
+    answer: "in"
   },
   {
     sentence: "Mein Bruder arbeitet _____ einem Geschäft.",
@@ -562,7 +552,7 @@ const questions = [
   {
     sentence: "Wir gehen _____ das Theater.",
     options: ["in", "auf", "zu", "an"],
-    answer: "ins"
+    answer: "in"
   },
   {
     sentence: "Meine Schwester arbeitet _____ einem Büro.",
@@ -605,8 +595,8 @@ const questions = [
     answer: "zur"
   },
   {
-    sentence: "Wir gehen _____ das Konzert.",
-    options: ["in", "auf", "zu", "an"],
+    sentence: "Wir gehen _____ Konzert.",
+    options: ["zum", "auf", "zu", "an"],
     answer: "zum"
   },
   {
