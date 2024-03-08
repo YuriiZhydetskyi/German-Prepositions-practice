@@ -12,7 +12,6 @@
     .blank {
       font-weight: bold;
     }
-  
     .fixed-bottom {
       position: fixed;
       bottom: 0;
@@ -37,12 +36,29 @@
     </div>
   </div>
 
-  <script src="questions.js"></script>
-  <script src="questionService.js"></script>
-  <script src="renderService.js"></script>
-  <script src="app.js"></script>
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script src="https://requirejs.org/docs/release/2.3.6/minified/require.js"></script>
+  <script>
+    requirejs.config({
+      baseUrl: './',
+      paths: {
+        app: 'app',
+        TopicSelector: 'TopicSelector',
+        VerbenUndNomenMitPraepositionenQuestionProvider: 'VerbenUndNomenMitPraepositionenQuestionProvider',
+        UserProgressManager: 'UserProgressManager',
+        DataPersistence: 'DataPersistence',
+        renderService: 'renderService',
+        QuestionsProvider: 'QuestionsProvider',
+        VerbenUndNomenMitPraepositionenQuestion: 'VerbenUndNomenMitPraepositionenQuestion',
+        QuestionType: 'QuestionType',
+        VerbenUndNomenMitPraepositionenQuestions: 'VerbenUndNomenMitPraepositionenQuestions'
+      }
+    });
+
+    requirejs(['app']);
+  </script>
+
 </body>
 </html>
