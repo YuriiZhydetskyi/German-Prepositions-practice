@@ -1,9 +1,10 @@
-define(function () {
+define(['./services/QuestionProbabilitySystem'], function (QuestionProbabilitySystem) {
     class UserProgressManager {
         constructor() {
             this.answerHistory = [];
             this.questionProbabilities = {};
             this.incorrectAnswers = [];
+            this.questionProbabilitySystem = new QuestionProbabilitySystem();
         }
 
         recordAnswer(question, isCorrect) {
@@ -17,6 +18,8 @@ define(function () {
                     time: new Date().toLocaleString()
                 });
             }
+
+            this.questionProbabilitySystem.updateQuestionLevel(question.topic, question.questionId, isCorrect);
         }
 
         updateQuestionProbability(question, isCorrect) {
@@ -35,6 +38,10 @@ define(function () {
 
         getQuestionProbabilities() {
             return this.questionProbabilities;
+        }
+
+        getQuestionProbability(topic, questionId) {
+            return this.questionProbabilitySystem.getQuestionProbability(topic, questionId);
         }
 
         getIncorrectAnswers() {

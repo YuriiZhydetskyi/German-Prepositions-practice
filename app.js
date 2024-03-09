@@ -4,12 +4,13 @@ define([
   './UserProgressManager',
   './DataPersistence',
   './renderService',
-  './config'
-], function(TopicSelector, VerbenUndNomenMitPraepositionenQuestionProvider, UserProgressManager, DataPersistence, renderService, config) {
+  './config',
+  './topicConfig'
+], function(TopicSelector, VerbenUndNomenMitPraepositionenQuestionProvider, UserProgressManager, DataPersistence, renderService, config, topicConfig) {
 
   const userProgressManager = new UserProgressManager();
   const dataPersistence = new DataPersistence();
-  const topicSelector = new TopicSelector(['Verben und Nomen mit Praepositionen']);
+  const topicSelector = new TopicSelector(topicConfig);
 
   let questionsProvider;
   let currentQuestion;

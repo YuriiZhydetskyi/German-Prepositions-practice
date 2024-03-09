@@ -1,18 +1,12 @@
 @echo off
-setlocal enabledelayedexpansion
 
-set "outputFile=result.txt"
+REM Set the path to your Python executable
+set PYTHON_PATH=python
 
-echo. > %outputFile%
+REM Set the path to your Python script
+set SCRIPT_PATH=combine_files.py
 
-for %%F in (*) do (
-    if not "%%F"=="%outputFile%" (
-        echo %%F >> %outputFile%
-        echo ''' >> %outputFile%
-        type "%%F" >> %outputFile%
-        echo ''' >> %outputFile%
-        echo. >> %outputFile%
-    )
-)
+REM Run the Python script
+%PYTHON_PATH% %SCRIPT_PATH%
 
-echo Combined all files into %outputFile%
+pause

@@ -1,8 +1,8 @@
 define(function () {
     class TopicSelector {
-        constructor(topics) {
-            this.topics = topics;
-            this.selectedTopic = topics[0];
+        constructor(topicConfig) {
+            this.topicConfig = topicConfig;
+            this.selectedTopic = Object.keys(topicConfig)[0];
         }
 
         renderTopicSelector() {
@@ -17,7 +17,7 @@ define(function () {
             topicSelectorSelect.className = 'topic-selector-select';
             topicSelectorSelect.addEventListener('change', this.handleTopicChange.bind(this));
 
-            this.topics.forEach(topic => {
+            Object.keys(this.topicConfig).forEach(topic => {
                 const option = document.createElement('option');
                 option.value = topic;
                 option.textContent = topic;
@@ -36,6 +36,10 @@ define(function () {
         getSelectedTopic() {
             return this.selectedTopic;
         }
+
+        getQuestionProviderModule() {
+            return this.topicConfig[this.selectedTopic];
+          }
     }
 
     return TopicSelector;
