@@ -17,6 +17,14 @@ define([
   let isAnswered = false;
 
   function initializeState() {
+    const savedLastBreakingChangesDate = dataPersistence.getLastBreakingChangesDate();
+    const configLastBreakingChangesDate = config.lastBreakingChangesDate;
+
+    if (savedLastBreakingChangesDate !== configLastBreakingChangesDate) {
+      dataPersistence.resetData();
+      dataPersistence.setLastBreakingChangesDate(configLastBreakingChangesDate);
+    }
+
     const savedProgress = dataPersistence.loadData();
     if (savedProgress) {
       userProgressManager.answerHistory = savedProgress.answerHistory;
