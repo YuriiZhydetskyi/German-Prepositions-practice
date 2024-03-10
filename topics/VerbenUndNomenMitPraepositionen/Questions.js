@@ -158,9 +158,9 @@ define(function () {
     },
     {
       id: "c7192e30-a1c0-47cc-813f-041a0442df2b",
-      options: ["in", "auf", "zur", "an"],
-      sentence: "Ich fahre _____ die Arbeit.",
-      answer: "zur"
+      options: ["in", "auf", "zu", "an"],
+      sentence: "Ich fahre _____ der Arbeit. (dativ die Arbeit)",
+      answer: "zu"
     },
     {
       id: "a18e8772-0516-4d85-86d1-986b4eace9cc",
@@ -188,9 +188,9 @@ define(function () {
     },
     {
       id: "f3c9518b-968f-46e4-8a0d-c5446f3ed6a6",
-      options: ["in", "auf", "zur", "an"],
-      sentence: "Wir gehen _____ die Bushaltestelle.",
-      answer: "zur"
+      options: ["in", "auf", "zu", "an"],
+      sentence: "Wir gehen _____ der Bushaltestelle. (dativ die Bushaltestelle)",
+      answer: "zu"
     },
     {
       id: "c0ef245d-564e-4827-b010-c47e0065e227",
@@ -453,8 +453,8 @@ define(function () {
     {
       id: "20e751de-4002-4c0e-8e06-7b1b4c8de9dd",
       options: ["in", "auf", "zu", "an"],
-      sentence: "Ich fahre _____ die Universität.",
-      answer: "zur"
+      sentence: "Ich fahre _____ der Universität. (dativ die Universität)",
+      answer: "zu"
     },
     {
       id: "2757022c-572b-459e-a460-277c6edf2b95",
@@ -507,8 +507,8 @@ define(function () {
     {
       id: "2777277d-0d34-47bb-8800-dc9f12b65323",
       options: ["in", "auf", "zu", "an"],
-      sentence: "Ich fahre _____ die Bäckerei.",
-      answer: "zur"
+      sentence: "Ich fahre _____ der Bäckerei. (dativ die Bäckerei)",
+      answer: "zu"
     },
     {
       id: "5c3f31f6-5e21-48ce-b898-077a0f5142a4",
@@ -549,8 +549,8 @@ define(function () {
     {
       id: "5b582c4a-e129-4e35-b057-08c66d5e1d8c",
       options: ["in", "auf", "zu", "an"],
-      sentence: "Ich fahre _____ die Post.",
-      answer: "zur"
+      sentence: "Ich fahre _____ der Post (dativ die Post).",
+      answer: "zu"
     },
     {
       id: "63e2e3fa-a373-4981-9c65-e75e726bb17c",
@@ -603,8 +603,8 @@ define(function () {
     {
       id: "09273e85-27c1-402a-9ba2-87834adcdd19",
       options: ["in", "auf", "zu", "an"],
-      sentence: "Ich fahre _____ die Bank.",
-      answer: "zur"
+      sentence: "Ich fahre _____ der Bank. (dativ die Bank)",
+      answer: "zu"
     },
     {
       id: "d2aafacd-17d8-4cdb-aa79-da45555463cf",
@@ -772,7 +772,7 @@ define(function () {
       id: "6bcc7ee8-f14a-4a01-bde0-09c69ee7701f",
       options: ["in", "auf", "zu", "an"],
       sentence: "Wir gehen _____ das Restaurant.",
-      answer: "ins"
+      answer: "in"
     },
     {
       id: "7e85142e-53eb-4cc1-94ba-5e9bf8a21d8d",
