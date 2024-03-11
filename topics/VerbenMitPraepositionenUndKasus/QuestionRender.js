@@ -44,6 +44,17 @@ define(function () {
                 <p class="translation">${currentQuestion.translation}</p>
                 <p class="translation-ukr">${currentQuestion.translationUkr}</p>
             `;
+
+            this.speakText(currentQuestion.resultSentence);
+        }
+
+        speakText(text) {
+            var synth = window.speechSynthesis;            
+            var utterThis = new SpeechSynthesisUtterance(text);
+
+            utterThis.lang = 'de-DE';
+            
+            synth.speak(utterThis);
         }
     }
 

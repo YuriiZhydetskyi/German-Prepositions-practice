@@ -54,6 +54,17 @@ define(function () {
                 blankElement.textContent = currentQuestion.answer;
                 blankElement.classList.add("text-success", "font-weight-bold");
             }
+
+            this.speakText(blankElement.textContent);
+        }
+
+        speakText(text) {
+            var synth = window.speechSynthesis;            
+            var utterThis = new SpeechSynthesisUtterance(text);
+
+            utterThis.lang = 'de-DE';
+            
+            synth.speak(utterThis);
         }
     }
 

@@ -15,6 +15,10 @@ define(['./config', './topicConfig'], function (config, topicConfig) {
         renderFeedback: function (isCorrect, answer, currentQuestion, answerHistory) {
             let questionRenderModule = topicConfig[currentQuestion.topic].questionRenderModule;
 
+            if(!isCorrect){
+                navigator.vibrate(200);
+            }
+
             requirejs([questionRenderModule], function(QuestionRender) {
                 let questionRender = new QuestionRender();
                 questionRender.renderFeedback(isCorrect, answer, currentQuestion);
