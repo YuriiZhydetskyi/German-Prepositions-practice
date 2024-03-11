@@ -41,7 +41,14 @@ define([
   }
 
   function handleAnswerSelection(event, answer) {
-    event.preventDefault();
+
+    if (event.isTrusted === false && event.currentTarget.hasAttribute('data-simulated')) {
+      event.currentTarget.removeAttribute('data-simulated');
+      return;
+    }
+
+    event.currentTarget.setAttribute('data-simulated', 'true');
+    event.currentTarget.click();
 
     if (isAnswered) {
       return;
@@ -77,7 +84,12 @@ define([
 
     // Update the title
     const topicText = topicConfig[selectedTopic].text;
-    document.querySelector('h1').textContent = topicText;
+    document.getElementById("topic-title").textContent = topicText;
+
+    let nextButton = document.getElementById("next");
+    if (!nextButton.classList.contains("d-none")) {
+      nextButton.click();
+    }
   }
 
   function startApp() {
@@ -88,7 +100,7 @@ define([
 
       const selectedTopic = topicSelector.getSelectedTopic();
       const topicText = topicConfig[selectedTopic].text;
-      document.querySelector('h1').textContent = topicText;
+      document.getElementById("topic-title").textContent = topicText;
 
       const questionProviderModule = topicSelector.getQuestionProviderModule();
 
