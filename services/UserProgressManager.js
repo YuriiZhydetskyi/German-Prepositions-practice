@@ -1,14 +1,18 @@
 define(['./services/QuestionProbabilitySystem'], function (QuestionProbabilitySystem) {
     class UserProgressManager {
         constructor() {
-            this.answerHistory = [];
+            this.answerHistory = {};
             this.questionProbabilities = {};
             this.incorrectAnswers = [];
             this.questionProbabilitySystem = new QuestionProbabilitySystem();
         }
 
         recordAnswer(question, isCorrect) {
-            this.answerHistory.push(isCorrect);
+            if (!this.answerHistory[question.topic]) {
+                this.answerHistory[question.topic] = [];
+            }
+            this.answerHistory[question.topic].push(isCorrect);
+
             this.updateQuestionProbability(question, isCorrect);
 
             if (!isCorrect) {
@@ -30,6 +34,10 @@ define(['./services/QuestionProbabilitySystem'], function (QuestionProbabilitySy
             } else {
                 this.questionProbabilities[question.sentence] = Math.min(currentProbability * 1.5, 5);
             }
+        }
+
+        getAnswerHistoryByTopic(topic) {
+            return this.answerHistory[topic] || [];
         }
 
         getAnswerHistory() {

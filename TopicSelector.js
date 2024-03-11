@@ -20,7 +20,7 @@ define(function () {
             Object.keys(this.topicConfig).forEach(topic => {
                 const option = document.createElement('option');
                 option.value = topic;
-                option.textContent = topic;
+                option.textContent = this.topicConfig[topic].text;
                 topicSelectorSelect.appendChild(option);
             });
 
@@ -31,6 +31,9 @@ define(function () {
 
         handleTopicChange(event) {
             this.selectedTopic = event.target.value;
+            // Trigger an event or call a function to update the questions and re-render the UI
+            const topicChangeEvent = new CustomEvent('topicChange', { detail: this.selectedTopic });
+            document.dispatchEvent(topicChangeEvent);
         }
 
         getSelectedTopic() {
@@ -38,8 +41,12 @@ define(function () {
         }
 
         getQuestionProviderModule() {
-            return this.topicConfig[this.selectedTopic];
-          }
+            return this.topicConfig[this.selectedTopic].questionProviderModule;
+        }
+
+        getQuestionRenderModule() {
+            return this.topicConfig[this.selectedTopic].questionRenderModule;
+        }
     }
 
     return TopicSelector;

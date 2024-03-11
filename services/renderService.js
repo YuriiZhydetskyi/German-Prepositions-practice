@@ -1,51 +1,20 @@
-define(['./config'], function (config) {
+define(['./config', './topicConfig'], function (config, topicConfig) {
     const renderService = {
         renderQuestion: function (question, handleAnswerSelection) {
-            const questionElement = document.getElementById("question");
-            questionElement.innerHTML = question.sentence.replace("_____", "<span class='blank'>_____</span>");
+            let questionRenderModule = topicConfig[question.topic].questionRenderModule;
 
-            const optionsDiv = document.getElementById("options");
-            optionsDiv.innerHTML = "";
-
-            const rowCount = 2;
-            const colCount = 2;
-
-            for (let i = 0; i < rowCount; i++) {
-                const row = document.createElement("div");
-                row.className = "row mb-2";
-
-                for (let j = 0; j < colCount; j++) {
-                    const index = i * colCount + j;
-                    if (index >= question.options.length) break;
-
-                    const option = question.options[index];
-                    const button = document.createElement("button");
-                    button.type = "button";
-                    button.className = "btn btn-outline-primary btn-block btn-lg";
-                    button.textContent = option;
-                    button.addEventListener("click", (event) => handleAnswerSelection(event, option));
-
-                    const col = document.createElement("div");
-                    col.className = "col-6";
-                    col.appendChild(button);
-                    row.appendChild(col);
-                }
-
-                optionsDiv.appendChild(row);
-            }
+            requirejs([questionRenderModule], function(QuestionRender) {
+                let questionRender = new QuestionRender();
+                questionRender.renderQuestion(question, handleAnswerSelection);
+            });
         },
 
         renderFeedback: function (isCorrect, answer, currentQuestion, answerHistory) {
-            const optionsDiv = document.getElementById("options");
-            const buttons = optionsDiv.querySelectorAll("button");
+            let questionRenderModule = topicConfig[currentQuestion.topic].questionRenderModule;
 
-            buttons.forEach((button) => {
-                button.classList.remove("btn-success", "btn-danger");
-                if (button.textContent === currentQuestion.answer) {
-                    button.classList.add("btn-success");
-                } else if (button.textContent === answer && !isCorrect) {
-                    button.classList.add("btn-danger");
-                }
+            requirejs([questionRenderModule], function(QuestionRender) {
+                let questionRender = new QuestionRender();
+                questionRender.renderFeedback(isCorrect, answer, currentQuestion);
             });
 
             const feedbackDiv = document.getElementById("feedback");
@@ -66,13 +35,6 @@ define(['./config'], function (config) {
                 }
 
                 badgeContainer.appendChild(row);
-            }
-
-            const questionElement = document.getElementById("question");
-            const blankElement = questionElement.querySelector(".blank");
-            if (blankElement) {
-                blankElement.textContent = currentQuestion.answer;
-                blankElement.classList.add("text-success", "font-weight-bold");
             }
 
             feedbackDiv.appendChild(badgeContainer);

@@ -1,7 +1,7 @@
 define([
-  './QuestionsProvider',
-  './VerbenUndNomenMitPraepositionenQuestion',
-  './VerbenUndNomenMitPraepositionenQuestions'
+  'QuestionsProvider',
+  './Question',
+  './Questions'
 ], function(QuestionsProvider, VerbenUndNomenMitPraepositionenQuestion, questions) {
   class VerbenUndNomenMitPraepositionenQuestionProvider extends QuestionsProvider {
     constructor(userProgressManager) {

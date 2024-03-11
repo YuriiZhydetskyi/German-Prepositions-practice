@@ -1,4 +1,4 @@
-define(['./QuestionType'], function (QuestionType) {
+define(['QuestionType'], function (QuestionType) {
     class VerbenUndNomenMitPraepositionenQuestion extends QuestionType {
         constructor(id, topic, sentence, options, answer) {
             super(id, topic, sentence, options, answer);

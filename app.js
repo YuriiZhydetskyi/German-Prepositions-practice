@@ -1,13 +1,11 @@
 define([
   './TopicSelector',
-  './VerbenUndNomenMitPraepositionenQuestionProvider',
   './UserProgressManager',
   './DataPersistence',
   './renderService',
   './config',
   './topicConfig'
-], function(TopicSelector, VerbenUndNomenMitPraepositionenQuestionProvider, UserProgressManager, DataPersistence, renderService, config, topicConfig) {
-
+], function (TopicSelector, UserProgressManager, DataPersistence, renderService, config, topicConfig) {
   const userProgressManager = new UserProgressManager();
   const dataPersistence = new DataPersistence();
   const topicSelector = new TopicSelector(topicConfig);
@@ -54,7 +52,7 @@ define([
     const isCorrect = questionsProvider.checkAnswer(currentQuestion, answer);
     userProgressManager.recordAnswer(currentQuestion, isCorrect);
 
-    renderService.renderFeedback(isCorrect, answer, currentQuestion, userProgressManager.getAnswerHistory());
+    renderService.renderFeedback(isCorrect, answer, currentQuestion, userProgressManager.getAnswerHistoryByTopic(currentQuestion.topic));
     document.getElementById("next").classList.remove("d-none");
   }
 
@@ -65,22 +63,42 @@ define([
     document.getElementById("next").classList.add("d-none");
     isAnswered = false;
   }
-  
+
+  function handleTopicChange(event) {
+    const selectedTopic = event.detail;
+    const questionProviderModule = topicSelector.getQuestionProviderModule();
+
+    requirejs([questionProviderModule], function (QuestionProvider) {
+      isAnswered = false;
+      questionsProvider = new QuestionProvider(userProgressManager);
+      currentQuestion = questionsProvider.getNextQuestion();
+      renderService.renderQuestion(currentQuestion, handleAnswerSelection);
+    });
+
+    // Update the title
+    const topicText = topicConfig[selectedTopic].text;
+    document.querySelector('h1').textContent = topicText;
+  }
+
   function startApp() {
     try {
       initializeState();
-  
+
       topicSelector.renderTopicSelector();
-  
+
       const selectedTopic = topicSelector.getSelectedTopic();
-      if (selectedTopic === 'Verben und Nomen mit Praepositionen') {
-        questionsProvider = new VerbenUndNomenMitPraepositionenQuestionProvider(userProgressManager);
+      const topicText = topicConfig[selectedTopic].text;
+      document.querySelector('h1').textContent = topicText;
+
+      const questionProviderModule = topicSelector.getQuestionProviderModule();
+
+      requirejs([questionProviderModule], function (QuestionProvider) {
+        questionsProvider = new QuestionProvider(userProgressManager);
         currentQuestion = questionsProvider.getNextQuestion();
         renderService.renderQuestion(currentQuestion, handleAnswerSelection);
-      } else {
-        // Handle case when no topic is selected or an unknown topic is selected
-        console.error('Invalid topic selected:', selectedTopic);
-      }
+      });
+
+      document.addEventListener('topicChange', handleTopicChange);
     } catch (error) {
       console.error('An error occurred:', error);
       // Handle the error appropriately, e.g., display an error message to the user
