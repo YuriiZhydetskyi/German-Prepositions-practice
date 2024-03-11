@@ -13,7 +13,7 @@ define([
 
         loadQuestions() {
             questions.forEach(question => {
-                const newQuestion = new VerbenMitPraepositionenUndKasusQuestion(question.id, this.topic, question.sentence, question.options, question.answer, question.verb);
+                const newQuestion = new VerbenMitPraepositionenUndKasusQuestion(question.id, this.topic, question.sentence, question.options, question.answer, question.verb, question.resultSentence, question.translation, question.translationUkr);
                 this.addQuestion(newQuestion);
             });
         }

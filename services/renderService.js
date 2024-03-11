@@ -3,6 +3,9 @@ define(['./config', './topicConfig'], function (config, topicConfig) {
         renderQuestion: function (question, handleAnswerSelection) {
             let questionRenderModule = topicConfig[question.topic].questionRenderModule;
 
+            const explanationElement = document.getElementById("explanation");
+            explanationElement.innerHTML = "";
+
             requirejs([questionRenderModule], function(QuestionRender) {
                 let questionRender = new QuestionRender();
                 questionRender.renderQuestion(question, handleAnswerSelection);

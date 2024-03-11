@@ -37,6 +37,13 @@ define(function () {
                 blankElement.textContent = currentQuestion.answer;
                 blankElement.classList.add("text-success", "font-weight-bold");
             }
+
+            const explanationElement = document.getElementById("explanation");
+            explanationElement.innerHTML = `
+                <p class="result-sentence">${currentQuestion.resultSentence}</p>
+                <p class="translation">${currentQuestion.translation}</p>
+                <p class="translation-ukr">${currentQuestion.translationUkr}</p>
+            `;
         }
     }
 
