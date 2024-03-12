@@ -4,26 +4,28 @@ define(['UserConfigs'], function (UserConfigs) {
             this.userConfigs = userConfigs;
             this.topicConfig = topicConfig;
             this.userMenuTemplate = `
-                <div id="userMenu" class="user-menu position-fixed top-0 end-0 bottom-0 start-0 bg-light p-4" style="display: none; z-index: 1000;">
+                <div id="userMenu" class="user-menu position-fixed h-100 w-100 bg-light p-4" style="display: none; z-index: 1000;">
                     <div class="user-menu-header d-flex justify-content-between align-items-center mb-4">
                         <h3>User Menu</h3>
-                        <button id="closeMenuBtn" class="btn-close" aria-label="Close"></button>
+                        <button id="closeMenuBtn" class="close" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
                     </div>
                     <div class="user-menu-content">
                         <div class="menu-item mb-3">
-                            <label for="topicSelector" class="form-label">Select Topic:</label>
-                            <select id="topicSelector" class="form-select topic-selector"></select>
+                            <label for="topicSelector" class="control-label">Select Topic:</label>
+                            <select id="topicSelector" class="form-control topic-selector"></select>
                         </div>
                         <div class="menu-item mb-3">
-                            <div class="form-check form-switch">
-                                <input type="checkbox" id="soundToggle" class="form-check-input sound-toggle">
-                                <label for="soundToggle" class="form-check-label">Sound</label>
+                            <div class="custom-control custom-switch">
+                                <input type="checkbox" id="soundToggle" class="custom-control-input sound-toggle">
+                                <label for="soundToggle" class="custom-control-label">Sound</label>
                             </div>
                         </div>
                         <div class="menu-item">
-                            <div class="form-check form-switch">
-                                <input type="checkbox" id="vibrationToggle" class="form-check-input vibration-toggle">
-                                <label for="vibrationToggle" class="form-check-label">Vibration</label>
+                            <div class="custom-control custom-switch">
+                                <input type="checkbox" id="vibrationToggle" class="custom-control-input vibration-toggle">
+                                <label for="vibrationToggle" class="custom-control-label">Vibration</label>
                             </div>
                         </div>
                     </div>
@@ -54,7 +56,7 @@ define(['UserConfigs'], function (UserConfigs) {
                 option.textContent = this.topicConfig[topic].text;
                 topicSelector.appendChild(option);
             });
-            
+
             let selectedTopic = this.userConfigs.getSelectedTopic();
             if (!selectedTopic) {
                 selectedTopic = Object.keys(this.topicConfig)[0];
@@ -82,7 +84,7 @@ define(['UserConfigs'], function (UserConfigs) {
         handleTopicChange(event) {
             const selectedTopic = event.target.value;
             this.userConfigs.setSelectedTopic(selectedTopic);
-            this.userConfigs.saveConfigs(); 
+            this.userConfigs.saveConfigs();
             const topicChangeEvent = new CustomEvent('topicChange', { detail: selectedTopic });
             document.dispatchEvent(topicChangeEvent);
         }

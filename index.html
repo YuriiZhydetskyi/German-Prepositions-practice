@@ -24,11 +24,20 @@
       padding: 10px;
       box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
     }
+
+    .menu-btn {
+      position: fixed;
+      top: 10px;
+      right: 10px;
+      z-index: 1001;
+    }
   </style>
 </head>
 
 <body>
-  <button id="menuBtn" class="menu-btn">&#9776;</button>
+  <button id="menuBtn" class="btn btn-primary menu-btn">
+    <i class="fas fa-bars"></i> Menu
+  </button>
   <div id="userMenuContainer"></div>
 
   <div class="container-fluid my-5">
@@ -48,6 +57,7 @@
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   <script src="https://requirejs.org/docs/release/2.3.6/minified/require.js"></script>
+  <script src="https://kit.fontawesome.com/your-font-awesome-kit.js" crossorigin="anonymous"></script>
   <script>
     requirejs.config({
       baseUrl: './',
