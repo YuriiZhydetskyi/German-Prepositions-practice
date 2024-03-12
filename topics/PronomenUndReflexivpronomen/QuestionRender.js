@@ -1,5 +1,9 @@
-define(function () {
+define(['UserConfigs'], function (UserConfigs) {
     class PronomenUndReflexivpronomenQuestionRender {
+        constructor() {
+            this.userConfigs = new UserConfigs();
+        }
+
         renderQuestion(question, handleAnswerSelection) {
             const questionElement = document.getElementById("question");
             questionElement.innerHTML = `${question.sentence.replace("_____", "<span class='blank'>_____</span>")}`;
@@ -49,15 +53,17 @@ define(function () {
                 <p class="translation-ukr">${currentQuestion.translationUkr}</p>
             `;
 
-            this.speakText(resultSentence);
+            if (this.userConfigs.isSoundEnabled()) {
+                this.speakText(resultSentence);
+            }
         }
 
         speakText(text) {
-            var synth = window.speechSynthesis;            
+            var synth = window.speechSynthesis;
             var utterThis = new SpeechSynthesisUtterance(text);
 
             utterThis.lang = 'de-DE';
-            
+
             synth.speak(utterThis);
         }
     }

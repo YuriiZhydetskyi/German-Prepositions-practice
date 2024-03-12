@@ -1,11 +1,13 @@
 define([
-  './TopicSelector',
+  'TopicSelector',
   './UserProgressManager',
   './DataPersistence',
   './renderService',
   './config',
-  './topicConfig'
-], function (TopicSelector, UserProgressManager, DataPersistence, renderService, config, topicConfig) {
+  'topicConfig',
+  'UserConfigs',
+  './userMenu/UserMenu',
+], function (TopicSelector, UserProgressManager, DataPersistence, renderService, config, topicConfig, UserConfigs, UserMenu) {
   const userProgressManager = new UserProgressManager();
   const dataPersistence = new DataPersistence();
   const topicSelector = new TopicSelector(topicConfig);
@@ -94,9 +96,13 @@ define([
 
   function startApp() {
     try {
-      initializeState();
+      const userConfigs = new UserConfigs();
+      userConfigs.loadConfigs();
 
-      topicSelector.renderTopicSelector();
+      const userMenu = new UserMenu(userConfigs, topicConfig);
+      userMenu.renderMenu();
+
+      initializeState();
 
       const selectedTopic = topicSelector.getSelectedTopic();
       const topicText = topicConfig[selectedTopic].text;

@@ -1,5 +1,9 @@
-define(function () {
+define(['UserConfigs'], function (UserConfigs) {
     class VerbenMitPraepositionenUndKasusQuestionRender {
+        constructor() {
+            this.userConfigs = new UserConfigs();
+        }
+
         renderQuestion(question, handleAnswerSelection) {
             const questionElement = document.getElementById("question");
             questionElement.innerHTML = `${question.verb} <br> ${question.sentence.replace("_____", "<span class='blank'>_____</span>")}`;
@@ -45,7 +49,9 @@ define(function () {
                 <p class="translation-ukr">${currentQuestion.translationUkr}</p>
             `;
 
-            this.speakText(currentQuestion.resultSentence);
+            if (this.userConfigs.isSoundEnabled()) {
+                this.speakText(currentQuestion.resultSentence);
+            }
         }
 
         speakText(text) {

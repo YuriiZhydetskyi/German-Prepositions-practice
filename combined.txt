@@ -1,0 +1,1108 @@
+app.js
+'''
+define([
+  './TopicSelector',
+  './UserProgressManager',
+  './DataPersistence',
+  './renderService',
+  './config',
+  './topicConfig'
+], function (TopicSelector, UserProgressManager, DataPersistence, renderService, config, topicConfig) {
+  const userProgressManager = new UserProgressManager();
+  const dataPersistence = new DataPersistence();
+  const topicSelector = new TopicSelector(topicConfig);
+
+  let questionsProvider;
+  let currentQuestion;
+  let isAnswered = false;
+
+  function initializeState() {
+    const savedLastBreakingChangesDate = dataPersistence.getLastBreakingChangesDate();
+    const configLastBreakingChangesDate = config.lastBreakingChangesDate;
+
+    if (savedLastBreakingChangesDate !== configLastBreakingChangesDate) {
+      dataPersistence.resetData();
+      dataPersistence.setLastBreakingChangesDate(configLastBreakingChangesDate);
+    }
+
+    const savedProgress = dataPersistence.loadData();
+    if (savedProgress) {
+      userProgressManager.answerHistory = savedProgress.answerHistory;
+      userProgressManager.questionProbabilities = savedProgress.questionProbabilities;
+      userProgressManager.incorrectAnswers = savedProgress.incorrectAnswers;
+    }
+  }
+
+  function saveState() {
+    const progressData = {
+      answerHistory: userProgressManager.getAnswerHistory(),
+      questionProbabilities: userProgressManager.getQuestionProbabilities(),
+      incorrectAnswers: userProgressManager.getIncorrectAnswers(),
+    };
+    dataPersistence.saveData(progressData);
+  }
+
+  function handleAnswerSelection(event, answer) {
+
+    if (event.isTrusted === false && event.currentTarget.hasAttribute('data-simulated')) {
+      event.currentTarget.removeAttribute('data-simulated');
+      return;
+    }
+
+    event.currentTarget.setAttribute('data-simulated', 'true');
+    event.currentTarget.click();
+
+    if (isAnswered) {
+      return;
+    } else {
+      isAnswered = true;
+    }
+
+    const isCorrect = questionsProvider.checkAnswer(currentQuestion, answer);
+    userProgressManager.recordAnswer(currentQuestion, isCorrect);
+
+    renderService.renderFeedback(isCorrect, answer, currentQuestion, userProgressManager.getAnswerHistoryByTopic(currentQuestion.topic));
+    document.getElementById("next").classList.remove("d-none");
+  }
+
+  function handleNextQuestion() {
+    saveState();
+    currentQuestion = questionsProvider.getNextQuestion();
+    renderService.renderQuestion(currentQuestion, handleAnswerSelection);
+    document.getElementById("next").classList.add("d-none");
+    isAnswered = false;
+  }
+
+  function handleTopicChange(event) {
+    const selectedTopic = event.detail;
+    const questionProviderModule = topicSelector.getQuestionProviderModule();
+
+    requirejs([questionProviderModule], function (QuestionProvider) {
+      isAnswered = false;
+      questionsProvider = new QuestionProvider(userProgressManager);
+      currentQuestion = questionsProvider.getNextQuestion();
+      renderService.renderQuestion(currentQuestion, handleAnswerSelection);
+    });
+
+    // Update the title
+    const topicText = topicConfig[selectedTopic].text;
+    document.getElementById("topic-title").textContent = topicText;
+
+    let nextButton = document.getElementById("next");
+    if (!nextButton.classList.contains("d-none")) {
+      nextButton.click();
+    }
+  }
+
+  function startApp() {
+    try {
+      initializeState();
+
+      topicSelector.renderTopicSelector();
+
+      const selectedTopic = topicSelector.getSelectedTopic();
+      const topicText = topicConfig[selectedTopic].text;
+      document.getElementById("topic-title").textContent = topicText;
+
+      const questionProviderModule = topicSelector.getQuestionProviderModule();
+
+      requirejs([questionProviderModule], function (QuestionProvider) {
+        questionsProvider = new QuestionProvider(userProgressManager);
+        currentQuestion = questionsProvider.getNextQuestion();
+        renderService.renderQuestion(currentQuestion, handleAnswerSelection);
+      });
+
+      document.addEventListener('topicChange', handleTopicChange);
+    } catch (error) {
+      console.error('An error occurred:', error);
+      // Handle the error appropriately, e.g., display an error message to the user
+    }
+  }
+
+  document.getElementById("next").addEventListener("click", handleNextQuestion);
+
+  startApp();
+
+});
+'''
+
+config.js
+'''
+define(function () {
+    const config = {
+        badgesPerRow: 20,
+        maxAnswersTracked: 100,
+        lastBreakingChangesDate: '2023-03-11'
+    };
+
+    return config;
+});
+'''
+
+index.html
+'''
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>German Practice</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    .badge {
+      margin-right: 5px;
+    }
+    .blank {
+      font-weight: bold;
+    }
+    .fixed-bottom {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background-color: white;
+      padding: 10px;
+      box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+    }
+  </style>
+</head>
+<body>
+  <div class="container-fluid my-5">
+    <div class="row justify-content-center">
+      <div class="col-md-8 col-lg-6">
+        <h3 id="topic-title" class="text-center mb-4 d-none"></h3>
+        <div id="question" class="mb-4 text-center h3"></div>
+        <div id="explanation" class="mb-4 text-center h5 border"></div>
+        <div id="options" class="btn-group-toggle mb-4" data-toggle="buttons"></div>
+        <button id="next" class="btn btn-primary d-none">Next</button>
+        <div id="feedback" class="mb-4"></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script src="https://requirejs.org/docs/release/2.3.6/minified/require.js"></script>
+  <script>
+    requirejs.config({
+      baseUrl: './',
+      paths: {
+        app: 'app',
+        TopicSelector: 'TopicSelector',
+        VerbenUndNomenMitPraepositionenQuestionProvider: 'topics/VerbenUndNomenMitPraepositionen/QuestionProvider',
+        UserProgressManager: 'services/UserProgressManager',
+        DataPersistence: 'services/DataPersistence',
+        renderService: 'services/renderService',
+        QuestionsProvider: 'QuestionsProvider',
+        VerbenUndNomenMitPraepositionenQuestion: 'topics/VerbenUndNomenMitPraepositionen/Question',
+        QuestionType: 'QuestionType',
+        VerbenUndNomenMitPraepositionenQuestions: 'topics/VerbenUndNomenMitPraepositionen/Questions',
+        QuestionProbabilitySystem: 'services/QuestionProbabilitySystem',
+      }
+    });
+
+    requirejs(['app']);
+  </script>
+
+</body>
+</html>
+'''
+
+QuestionGenerator.js
+'''
+define(function () {
+    class QuestionGenerator {
+        generateQuestion(questionType, difficulty) {
+            // Implementation for generating questions based on type and difficulty
+            // You can use predefined rules, algorithms, or external libraries here
+            // Return the generated question
+        }
+    }
+
+    return QuestionGenerator;
+});
+'''
+
+QuestionsProvider.js
+'''
+define(function () {
+    class QuestionsProvider {
+        constructor() {
+            this.questionList = [];
+            this.currentQuestionIndex = 0;
+        }
+
+        getNextQuestion() {
+            if (this.currentQuestionIndex >= this.questionList.length) {
+                this.currentQuestionIndex = 0;
+            }
+            return this.questionList[this.currentQuestionIndex++];
+        }
+
+        checkAnswer(question, userAnswer) {
+            return question.checkAnswer(userAnswer);
+        }
+
+        resetProgress() {
+            this.currentQuestionIndex = 0;
+        }
+
+        addQuestion(question) {
+            this.questionList.push(question);
+        }
+    }
+
+    return QuestionsProvider;
+});
+'''
+
+QuestionType.js
+'''
+define(function () {
+  class QuestionType {
+    constructor(id, topic, sentence, options, answer) {
+      this.id = id;
+      this.topic = topic;
+      this.sentence = sentence;
+      this.options = options;
+      this.answer = answer;
+    }
+
+    checkAnswer(userAnswer) {
+      return userAnswer === this.answer;
+    }
+  }
+
+  return QuestionType;
+});
+'''
+
+topicConfig.js
+'''
+define(function() {
+  const topicConfig = {
+    'VerbenMitPraepositionenUndKasus': {
+      text: 'Verben mit Praepositionen und Kasus',
+      questionProviderModule: 'topics/VerbenMitPraepositionenUndKasus/QuestionProvider',
+      questionRenderModule: 'topics/VerbenMitPraepositionenUndKasus/QuestionRender'
+    },
+    'VerbenUndNomenMitPraepositionen': {
+      text: 'Verben und Nomen mit Praepositionen',
+      questionProviderModule: 'topics/VerbenUndNomenMitPraepositionen/QuestionProvider',
+      questionRenderModule: 'topics/VerbenUndNomenMitPraepositionen/QuestionRender'
+    },
+    'PronomenUndReflexivpronomen': {
+      text: 'Pronomen und Reflexivpronomen',
+      questionProviderModule: 'topics/PronomenUndReflexivpronomen/QuestionProvider',
+      questionRenderModule: 'topics/PronomenUndReflexivpronomen/QuestionRender'
+    }
+  };
+  return topicConfig;
+});
+'''
+
+TopicSelector.js
+'''
+define(function () {
+    class TopicSelector {
+        constructor(topicConfig) {
+            this.topicConfig = topicConfig;
+            this.selectedTopic = Object.keys(topicConfig)[0];
+        }
+
+        renderTopicSelector() {
+            const topicSelectorContainer = document.createElement('div');
+            topicSelectorContainer.className = 'topic-selector-container';
+
+            const topicSelectorLabel = document.createElement('label');
+            topicSelectorLabel.textContent = 'Select a topic:';
+            topicSelectorContainer.appendChild(topicSelectorLabel);
+
+            const topicSelectorSelect = document.createElement('select');
+            topicSelectorSelect.className = 'topic-selector-select';
+            topicSelectorSelect.addEventListener('change', this.handleTopicChange.bind(this));
+
+            Object.keys(this.topicConfig).forEach(topic => {
+                const option = document.createElement('option');
+                option.value = topic;
+                option.textContent = this.topicConfig[topic].text;
+                topicSelectorSelect.appendChild(option);
+            });
+
+            topicSelectorContainer.appendChild(topicSelectorSelect);
+
+            document.body.insertBefore(topicSelectorContainer, document.body.firstChild);
+        }
+
+        handleTopicChange(event) {
+            this.selectedTopic = event.target.value;
+            // Trigger an event or call a function to update the questions and re-render the UI
+            const topicChangeEvent = new CustomEvent('topicChange', { detail: this.selectedTopic });
+            document.dispatchEvent(topicChangeEvent);
+        }
+
+        getSelectedTopic() {
+            return this.selectedTopic;
+        }
+
+        getQuestionProviderModule() {
+            return this.topicConfig[this.selectedTopic].questionProviderModule;
+        }
+
+        getQuestionRenderModule() {
+            return this.topicConfig[this.selectedTopic].questionRenderModule;
+        }
+    }
+
+    return TopicSelector;
+});
+'''
+
+services\DataPersistence.js
+'''
+define(function () {
+    class DataPersistence {
+        saveData(data) {
+            localStorage.setItem('appData', JSON.stringify(data));
+        }
+
+        loadData() {
+            const data = localStorage.getItem('appData');
+            return data ? JSON.parse(data) : null;
+        }
+
+        getLastBreakingChangesDate() {
+            return localStorage.getItem('lastBreakingChangesDate');
+        }
+
+        setLastBreakingChangesDate(date) {
+            localStorage.setItem('lastBreakingChangesDate', date);
+        }
+
+        resetData() {
+            localStorage.removeItem('appData');
+            localStorage.removeItem('lastBreakingChangesDate');
+        }
+    }
+
+    return DataPersistence;
+});
+'''
+
+services\QuestionProbabilitySystem.js
+'''
+define(function() {
+    class QuestionProbabilitySystem {
+      constructor(levels = 3) {
+        this.levels = levels;
+        this.questionLevels = {};
+      }
+  
+      getQuestionLevel(topic, questionId) {
+        const key = `${topic}_${questionId}`;
+        return this.questionLevels[key] || 0;
+      }
+  
+      updateQuestionLevel(topic, questionId, isCorrect) {
+        const key = `${topic}_${questionId}`;
+        const currentLevel = this.getQuestionLevel(topic, questionId);
+        const newLevel = isCorrect ? currentLevel + 1 : 0;
+        this.questionLevels[key] = Math.min(newLevel, this.levels - 1);
+      }
+  
+      getQuestionProbability(topic, questionId) {
+        const level = this.getQuestionLevel(topic, questionId);
+        return Math.pow(2, this.levels - level - 1);
+      }
+    }
+  
+    return QuestionProbabilitySystem;
+  });
+'''
+
+services\renderService.js
+'''
+define(['./config', './topicConfig'], function (config, topicConfig) {
+    const renderService = {
+        renderQuestion: function (question, handleAnswerSelection) {
+            let questionRenderModule = topicConfig[question.topic].questionRenderModule;
+
+            const explanationElement = document.getElementById("explanation");
+            explanationElement.innerHTML = "";
+
+            requirejs([questionRenderModule], function(QuestionRender) {
+                let questionRender = new QuestionRender();
+                questionRender.renderQuestion(question, handleAnswerSelection);
+            });
+        },
+
+        renderFeedback: function (isCorrect, answer, currentQuestion, answerHistory) {
+            let questionRenderModule = topicConfig[currentQuestion.topic].questionRenderModule;
+
+            if(!isCorrect){
+                navigator.vibrate(200);
+            }
+
+            requirejs([questionRenderModule], function(QuestionRender) {
+                let questionRender = new QuestionRender();
+                questionRender.renderFeedback(isCorrect, answer, currentQuestion);
+            });
+
+            const feedbackDiv = document.getElementById("feedback");
+            feedbackDiv.innerHTML = "";
+
+            const badgeContainer = document.createElement("div");
+            badgeContainer.classList.add("d-flex", "flex-wrap", "justify-content-center", "fixed-bottom", "mb-2");
+
+            for (let i = 0; i < answerHistory.length; i += config.badgesPerRow) {
+                const row = document.createElement("div");
+                row.classList.add("d-flex", "mb-2");
+
+                for (let j = 0; j < config.badgesPerRow && i + j < answerHistory.length; j++) {
+                    const badge = document.createElement("span");
+                    badge.className = `badge ${answerHistory[i + j] ? "badge-success" : "badge-danger"} mr-2`;
+                    badge.textContent = "●";
+                    row.appendChild(badge);
+                }
+
+                badgeContainer.appendChild(row);
+            }
+
+            feedbackDiv.appendChild(badgeContainer);
+
+            const correctAnswers = answerHistory.filter((result) => result).length;
+            const totalAnswers = Math.min(answerHistory.length, config.maxAnswersTracked);
+            const scoreDiv = document.createElement("div");
+            scoreDiv.classList.add("text-center", "mb-2");
+            scoreDiv.textContent = `Correct ${correctAnswers}/${totalAnswers}`;
+            feedbackDiv.appendChild(scoreDiv);
+        }
+    };
+
+    return renderService;
+});
+'''
+
+services\UserProgressManager.js
+'''
+define(['./services/QuestionProbabilitySystem'], function (QuestionProbabilitySystem) {
+    class UserProgressManager {
+        constructor() {
+            this.answerHistory = {};
+            this.questionProbabilities = {};
+            this.incorrectAnswers = [];
+            this.questionProbabilitySystem = new QuestionProbabilitySystem();
+        }
+
+        recordAnswer(question, isCorrect) {
+            if (!this.answerHistory[question.topic]) {
+                this.answerHistory[question.topic] = [];
+            }
+            this.answerHistory[question.topic].push(isCorrect);
+
+            this.updateQuestionProbability(question, isCorrect);
+
+            if (!isCorrect) {
+                this.incorrectAnswers.push({
+                    question: question.sentence,
+                    answer: question.answer,
+                    time: new Date().toLocaleString()
+                });
+            }
+
+            this.questionProbabilitySystem.updateQuestionLevel(question.topic, question.questionId, isCorrect);
+        }
+
+        updateQuestionProbability(question, isCorrect) {
+            const currentProbability = this.questionProbabilities[question.sentence] || 1;
+
+            if (isCorrect) {
+                this.questionProbabilities[question.sentence] = Math.max(currentProbability * 0.9, 0.1);
+            } else {
+                this.questionProbabilities[question.sentence] = Math.min(currentProbability * 1.5, 5);
+            }
+        }
+
+        getAnswerHistoryByTopic(topic) {
+            return this.answerHistory[topic] || [];
+        }
+
+        getAnswerHistory() {
+            return this.answerHistory;
+        }
+
+        getQuestionProbabilities() {
+            return this.questionProbabilities;
+        }
+
+        getQuestionProbability(topic, questionId) {
+            return this.questionProbabilitySystem.getQuestionProbability(topic, questionId);
+        }
+
+        getIncorrectAnswers() {
+            return this.incorrectAnswers;
+        }
+    }
+
+    return UserProgressManager;
+});
+'''
+
+topics\PronomenUndReflexivpronomen\Question.js
+'''
+define(['QuestionType'], function (QuestionType) {
+    class PronomenUndReflexivpronomenQuestion extends QuestionType {
+        constructor(id, topic, sentence, options, answer, translation, translationUkr) {
+            super(id, topic, sentence, options, answer);
+            this.translation = translation;
+            this.translationUkr = translationUkr;
+        }
+    }
+    return PronomenUndReflexivpronomenQuestion;
+});
+'''
+
+topics\PronomenUndReflexivpronomen\QuestionProvider.js
+'''
+define([
+    'QuestionsProvider',
+    './Question',
+    './Questions'
+], function (QuestionsProvider, PronomenUndReflexivpronomenQuestion, questions) {
+    class PronomenUndReflexivpronomenQuestionProvider extends QuestionsProvider {
+        constructor(userProgressManager) {
+            super();
+            this.topic = 'PronomenUndReflexivpronomen';
+            this.userProgressManager = userProgressManager;
+            this.loadQuestions();
+        }
+
+        loadQuestions() {
+            questions.forEach(question => {
+                const newQuestion = new PronomenUndReflexivpronomenQuestion(question.id, this.topic, question.sentence, question.options, question.answer, question.translation, question.translationUkr);
+                this.addQuestion(newQuestion);
+            });
+        }
+
+        getNextQuestion() {
+            const questionProbabilities = this.questionList.map(question =>
+                this.userProgressManager.getQuestionProbability(question.topic, question.id)
+            );
+            const totalProbability = questionProbabilities.reduce((sum, probability) => sum + probability, 0);
+            let randomValue = Math.random() * totalProbability;
+
+            for (let i = 0; i < this.questionList.length; i++) {
+                const question = this.questionList[i];
+                const probability = questionProbabilities[i];
+                randomValue -= probability;
+
+                if (randomValue <= 0) {
+                    return question;
+                }
+            }
+
+            return this.questionList[0];
+        }
+    }
+
+    return PronomenUndReflexivpronomenQuestionProvider;
+});
+'''
+
+topics\PronomenUndReflexivpronomen\QuestionRender.js
+'''
+define(function () {
+    class PronomenUndReflexivpronomenQuestionRender {
+        renderQuestion(question, handleAnswerSelection) {
+            const questionElement = document.getElementById("question");
+            questionElement.innerHTML = `${question.sentence.replace("_____", "<span class='blank'>_____</span>")}`;
+
+            const optionsDiv = document.getElementById("options");
+            optionsDiv.innerHTML = "";
+
+            question.options.forEach(option => {
+                const button = document.createElement("button");
+                button.type = "button";
+                button.className = "btn btn-outline-primary btn-block btn-lg";
+                button.textContent = option;
+                button.addEventListener("click", (event) => handleAnswerSelection(event, option));
+
+                optionsDiv.appendChild(button);
+            });
+        }
+
+        renderFeedback(isCorrect, answer, currentQuestion) {
+            const optionsDiv = document.getElementById("options");
+            const buttons = optionsDiv.querySelectorAll("button");
+
+            buttons.forEach((button) => {
+                button.classList.remove("btn-success", "btn-danger");
+                if (button.textContent === currentQuestion.answer) {
+                    button.classList.add("btn-success");
+                } else if (button.textContent === answer && !isCorrect) {
+                    button.classList.add("btn-danger");
+                }
+            });
+
+            const questionElement = document.getElementById("question");
+            const blankElement = questionElement.querySelector(".blank");
+            if (blankElement) {
+                blankElement.textContent = currentQuestion.answer;
+                blankElement.classList.add("text-success", "font-weight-bold");
+            }
+
+            let resultSentence = questionElement.textContent;
+            //remove everything what is in brackets and brackets itself from the result sentence
+            resultSentence = resultSentence.replace(/\(.*?\)/g, '');
+
+            const explanationElement = document.getElementById("explanation");
+            explanationElement.innerHTML = `
+                <p class="result-sentence">${resultSentence}</p>
+                <p class="translation">${currentQuestion.translation}</p>
+                <p class="translation-ukr">${currentQuestion.translationUkr}</p>
+            `;
+
+            this.speakText(resultSentence);
+        }
+
+        speakText(text) {
+            var synth = window.speechSynthesis;            
+            var utterThis = new SpeechSynthesisUtterance(text);
+
+            utterThis.lang = 'de-DE';
+            
+            synth.speak(utterThis);
+        }
+    }
+
+    return PronomenUndReflexivpronomenQuestionRender;
+});
+'''
+
+topics\PronomenUndReflexivpronomen\Questions.js
+'''
+define(function () {
+    const questions = [
+        {
+            "id": "18647adb-6204-42fd-a4ed-8fb042576762",
+            "options": ["ich", "mich", "mir", "ihn"],
+            "sentence": "Sie arbeitet mit _____ (ich + D).",
+            "translation": "She works with me",
+            "translationUkr": "Вона працює зі мною.",
+            "answer": "mir",
+        },
+        {
+            "id": "8d36c436-3f97-4152-ab1c-ab1b9c0a03e6",
+            "options": ["du", "mir", "dich", "dir"],
+            "sentence": "Ich kaufe _____ (du + D) ein Geschenk.",
+            "translation": "I am buying you a gift.",
+            "translationUkr": "Я купую тобі подарунок.",
+            "answer": "dir",
+        },
+        {
+            "id": "261a75e5-6a90-430c-95e1-9d8fadd1d2af",
+            "options": ["sich", "ihm", "ihn", "sie"],
+            "sentence": "Er sieht _____ (er + A) im Spiegel.",
+            "translation": "He sees himself in the mirror.",
+            "translationUkr": "Він бачить себе в дзеркалі.",
+            "answer": "sich",
+        },
+        
+    ]
+
+    return questions;
+});
+'''
+
+topics\VerbenMitPraepositionenUndKasus\Question.js
+'''
+define(['QuestionType'], function (QuestionType) {
+    class VerbenMitPraepositionenUndKasusQuestion extends QuestionType {
+        constructor(id, topic, sentence, options, answer, verb, resultSentence, translation, translationUkr) {
+            super(id, topic, sentence, options, answer);
+            this.verb = verb;
+            this.resultSentence = resultSentence;
+            this.translation = translation;
+            this.translationUkr = translationUkr;
+        }
+    }
+    return VerbenMitPraepositionenUndKasusQuestion;
+});
+'''
+
+topics\VerbenMitPraepositionenUndKasus\QuestionProvider.js
+'''
+define([
+    'QuestionsProvider',
+    './Question',
+    './Questions'
+], function (QuestionsProvider, VerbenMitPraepositionenUndKasusQuestion, questions) {
+    class VerbenMitPraepositionenUndKasusQuestionProvider extends QuestionsProvider {
+        constructor(userProgressManager) {
+            super();
+            this.topic = 'VerbenMitPraepositionenUndKasus';
+            this.userProgressManager = userProgressManager;
+            this.loadQuestions();
+        }
+
+        loadQuestions() {
+            questions.forEach(question => {
+                const newQuestion = new VerbenMitPraepositionenUndKasusQuestion(question.id, this.topic, question.sentence, question.options, question.answer, question.verb, question.resultSentence, question.translation, question.translationUkr);
+                this.addQuestion(newQuestion);
+            });
+        }
+
+        getNextQuestion() {
+            const questionProbabilities = this.questionList.map(question =>
+                this.userProgressManager.getQuestionProbability(question.topic, question.id)
+            );
+            const totalProbability = questionProbabilities.reduce((sum, probability) => sum + probability, 0);
+            let randomValue = Math.random() * totalProbability;
+
+            for (let i = 0; i < this.questionList.length; i++) {
+                const question = this.questionList[i];
+                const probability = questionProbabilities[i];
+                randomValue -= probability;
+
+                if (randomValue <= 0) {
+                    return question;
+                }
+            }
+
+            return this.questionList[0];
+        }
+    }
+
+    return VerbenMitPraepositionenUndKasusQuestionProvider;
+});
+'''
+
+topics\VerbenMitPraepositionenUndKasus\QuestionRender.js
+'''
+define(function () {
+    class VerbenMitPraepositionenUndKasusQuestionRender {
+        renderQuestion(question, handleAnswerSelection) {
+            const questionElement = document.getElementById("question");
+            questionElement.innerHTML = `${question.verb} <br> ${question.sentence.replace("_____", "<span class='blank'>_____</span>")}`;
+
+            const optionsDiv = document.getElementById("options");
+            optionsDiv.innerHTML = "";
+
+            question.options.forEach(option => {
+                const button = document.createElement("button");
+                button.type = "button";
+                button.className = "btn btn-outline-primary btn-block btn-lg";
+                button.textContent = option;
+                button.addEventListener("click", (event) => handleAnswerSelection(event, option));
+
+                optionsDiv.appendChild(button);
+            });
+        }
+
+        renderFeedback(isCorrect, answer, currentQuestion) {
+            const optionsDiv = document.getElementById("options");
+            const buttons = optionsDiv.querySelectorAll("button");
+
+            buttons.forEach((button) => {
+                button.classList.remove("btn-success", "btn-danger");
+                if (button.textContent === currentQuestion.answer) {
+                    button.classList.add("btn-success");
+                } else if (button.textContent === answer && !isCorrect) {
+                    button.classList.add("btn-danger");
+                }
+            });
+
+            const questionElement = document.getElementById("question");
+            const blankElement = questionElement.querySelector(".blank");
+            if (blankElement) {
+                blankElement.textContent = currentQuestion.answer;
+                blankElement.classList.add("text-success", "font-weight-bold");
+            }
+
+            const explanationElement = document.getElementById("explanation");
+            explanationElement.innerHTML = `
+                <p class="result-sentence">${currentQuestion.resultSentence}</p>
+                <p class="translation">${currentQuestion.translation}</p>
+                <p class="translation-ukr">${currentQuestion.translationUkr}</p>
+            `;
+
+            this.speakText(currentQuestion.resultSentence);
+        }
+
+        speakText(text) {
+            var synth = window.speechSynthesis;            
+            var utterThis = new SpeechSynthesisUtterance(text);
+
+            utterThis.lang = 'de-DE';
+            
+            synth.speak(utterThis);
+        }
+    }
+
+    return VerbenMitPraepositionenUndKasusQuestionRender;
+});
+'''
+
+topics\VerbenMitPraepositionenUndKasus\Questions.js
+'''
+define(function () {
+    const questions = [
+        {
+            "id": "e061074c-5c69-4bab-af70-20382e9ca4a1",
+            "options": ["auf + Akkusativ", "über + Akkusativ", "von + Dativ", "mit + Dativ"],
+            "sentence": "Er ärgert sich _____ (die) schlechte Note.",
+            "resultSentence": "Er ärgert sich über die schlechte Note.",
+            "translation": "He is angry about the bad grade.",
+            "translationUkr": "Він злиться через погану оцінку.",
+            "answer": "über + Akkusativ",
+            "verb": "sich ärgern"
+        },
+        {
+            "id": "3f178ffc-bd6a-44f1-8a0f-781439b323ca",
+            "options": ["für + Akkusativ", "auf + Akkusativ", "von + Dativ", "bei + Dativ"],
+            "sentence": "Bedanken Sie sich _____ (die) E-Mail.",
+            "resultSentence": "Bedanken Sie sich für die E-Mail.",
+            "translation": "Thank you for the email.",
+            "translationUkr": "Дякуємо за електронний лист.",
+            "answer": "für + Akkusativ",
+            "verb": "sich bedanken"
+        },
+        {
+            "id": "b761a757-bd7f-4c7e-bcd7-4a53a4b6fc17",
+            "options": ["für + Akkusativ", "auf + Akkusativ", "von + Dativ", "mit + Dativ"],
+            "sentence": "Ich beschränke mich _____ (die) Vor- und Nachteile.",
+            "resultSentence": "Ich beschränke mich auf die Vor- und Nachteile.",
+            "translation": "I limit myself to the advantages and disadvantages.",
+            "translationUkr": "Я обмежуюся перевагами та недоліками.",
+            "answer": "auf + Akkusativ",
+            "verb": "sich beschränken"
+        },
+        {
+            "id": "b22a81df-e7d8-4341-b0b3-7871a5d2031a",
+            "options": ["über + Akkusativ", "an + Akkusativ", "von + Dativ", "bei + Dativ"],
+            "sentence": "Ich habe gestern _____ dich gedacht.",
+            "resultSentence": "Ich habe gestern an dich gedacht.",
+            "translation": "I thought of you yesterday.",
+            "translationUkr": "Я думав про тебе вчора.",
+            "answer": "an + Akkusativ",
+            "verb": "denken"
+        },
+        {
+            "id": "37e353ae-e9b9-4294-8ba4-b788a1475b74",
+            "options": ["für + Akkusativ", "gegen + Akkusativ", "bei + Dativ", "zu + Dativ"],
+            "sentence": "So setzen Sie sich _____ (Ihre) Kollegen durch.",
+            "resultSentence": "So setzen Sie sich gegen Ihre Kollegen durch.",
+            "translation": "This is how you assert yourself against your colleagues.",
+            "translationUkr": "Так ви утверджуєте себе проти своїх колег.",
+            "answer": "gegen + Akkusativ",
+            "verb": "sich durchsetzen"
+        },
+        {
+            "id": "1edd5076-247c-4013-b0e6-4d7df05d4990",
+            "options": ["in + Akkusativ", "auf + Akkusativ", "von + Dativ", "mit + Dativ"],
+            "sentence": "Ich möchte mein Wissen _____ (Ihr) Unternehmen einbringen.",
+            "resultSentence": "Ich möchte mein Wissen in Ihr Unternehmen einbringen.",
+            "translation": "I would like to contribute my knowledge to your company.",
+            "translationUkr": "Я хотів би передати свої знання вашій компанії.",
+            "answer": "in + Akkusativ",
+            "verb": "einbringen"
+        },
+        {
+            "id": "d2b90057-2049-4a87-8998-72f7aea27f6c",
+            "options": ["für + Akkusativ", "gegen + Akkusativ", "auf + Akkusativ", "von + Dativ"],
+            "sentence": "Der Arzt geht _____ (die) Fragen ein.",
+            "resultSentence": "Der Arzt geht auf die Fragen ein.",
+            "translation": "The doctor addresses the questions.",
+            "translationUkr": "Лікар відповідає на запитання.",
+            "answer": "auf + Akkusativ",
+            "verb": "eingehen"
+        }
+    ]
+
+    return questions;
+});
+'''
+
+topics\VerbenUndNomenMitPraepositionen\Question.js
+'''
+define(['QuestionType'], function (QuestionType) {
+    class VerbenUndNomenMitPraepositionenQuestion extends QuestionType {
+        constructor(id, topic, sentence, options, answer) {
+            super(id, topic, sentence, options, answer);
+        }
+    }
+    return VerbenUndNomenMitPraepositionenQuestion;
+});
+'''
+
+topics\VerbenUndNomenMitPraepositionen\QuestionProvider.js
+'''
+define([
+  'QuestionsProvider',
+  './Question',
+  './Questions'
+], function(QuestionsProvider, VerbenUndNomenMitPraepositionenQuestion, questions) {
+  class VerbenUndNomenMitPraepositionenQuestionProvider extends QuestionsProvider {
+    constructor(userProgressManager) {
+      super();
+      this.topic = 'VerbenUndNomenMitPraepositionen';
+      this.userProgressManager = userProgressManager;
+      this.loadQuestions();
+    }
+
+    loadQuestions() {
+      questions.forEach(question => {
+        const { id, topic, sentence, options, answer } = question;
+        const newQuestion = new VerbenUndNomenMitPraepositionenQuestion(id, this.topic, sentence, options, answer);
+        this.addQuestion(newQuestion);
+      });
+    }
+
+    getNextQuestion() {
+      const questionProbabilities = this.questionList.map(question =>
+        this.userProgressManager.getQuestionProbability(question.topic, question.id)
+      );
+      const totalProbability = questionProbabilities.reduce((sum, probability) => sum + probability, 0);
+      let randomValue = Math.random() * totalProbability;
+    
+      for (let i = 0; i < this.questionList.length; i++) {
+        const question = this.questionList[i];
+        const probability = questionProbabilities[i];
+        randomValue -= probability;
+    
+        if (randomValue <= 0) {
+          return question;
+        }
+      }
+    
+      return this.questionList[0];
+    }
+  }
+
+  return VerbenUndNomenMitPraepositionenQuestionProvider;
+});
+'''
+
+topics\VerbenUndNomenMitPraepositionen\QuestionRender.js
+'''
+define(function () {
+    class VerbenUndNomenMitPraepositionenQuestionRender {
+        renderQuestion(question, handleAnswerSelection) {
+            const questionElement = document.getElementById("question");
+            questionElement.innerHTML = question.sentence.replace("_____", "<span class='blank'>_____</span>");
+
+            const optionsDiv = document.getElementById("options");
+            optionsDiv.innerHTML = "";
+
+            const rowCount = 2;
+            const colCount = 2;
+
+            for (let i = 0; i < rowCount; i++) {
+                const row = document.createElement("div");
+                row.className = "row mb-2";
+
+                for (let j = 0; j < colCount; j++) {
+                    const index = i * colCount + j;
+                    if (index >= question.options.length) break;
+
+                    const option = question.options[index];
+                    const button = document.createElement("button");
+                    button.type = "button";
+                    button.className = "btn btn-outline-primary btn-block btn-lg";
+                    button.textContent = option;
+                    button.addEventListener("click", (event) => handleAnswerSelection(event, option));
+
+                    const col = document.createElement("div");
+                    col.className = "col-6";
+                    col.appendChild(button);
+                    row.appendChild(col);
+                }
+
+                optionsDiv.appendChild(row);
+            }
+        }
+
+        renderFeedback(isCorrect, answer, currentQuestion) {
+            const optionsDiv = document.getElementById("options");
+            const buttons = optionsDiv.querySelectorAll("button");
+
+            buttons.forEach((button) => {
+                button.classList.remove("btn-success", "btn-danger");
+                if (button.textContent === currentQuestion.answer) {
+                    button.classList.add("btn-success");
+                } else if (button.textContent === answer && !isCorrect) {
+                    button.classList.add("btn-danger");
+                }
+            });
+
+            const questionElement = document.getElementById("question");
+            const blankElement = questionElement.querySelector(".blank");
+            if (blankElement) {
+                blankElement.textContent = currentQuestion.answer;
+                blankElement.classList.add("text-success", "font-weight-bold");
+            }
+
+            this.speakText(questionElement.textContent);
+        }
+
+        speakText(text) {
+            var synth = window.speechSynthesis;            
+            var utterThis = new SpeechSynthesisUtterance(text);
+
+            utterThis.lang = 'de-DE';
+            
+            synth.speak(utterThis);
+        }
+    }
+
+    return VerbenUndNomenMitPraepositionenQuestionRender;
+});
+'''
+
+topics\VerbenUndNomenMitPraepositionen\Questions.js
+'''
+define(function () {
+  const questions = [
+    {
+      id: "47e6ef18-eef2-49e3-bc9f-75ebe0c1a9c2",
+      options: ["in", "auf", "zu", "an"],
+      sentence: "Ich gehe _____ die Schule.",
+      answer: "in"
+    },
+    {
+      id: "1937e312-0ad8-4339-84cf-6b1ba1bc19b6",
+      options: ["in", "auf", "zur", "an"],
+      sentence: "Ich gehe _____ Schule.",
+      answer: "zur"
+    },
+    {
+      id: "ef79d183-45ac-48af-b152-bbca03ad55e6",
+      options: ["in", "auf", "zu", "an"],
+      sentence: "Mein Bruder arbeitet _____ einem Büro.",
+      answer: "in"
+    },
+    {
+      id: "26746fa0-f224-437a-bcdb-e38bd5250885",
+      options: ["in", "auf", "zu", "im"],
+      sentence: "Wir fahren _____ dem Urlaub.",
+      answer: "in"
+    },
+    {
+      id: "64b5caf2-e2bf-4a45-82b1-1806a7ac6701",
+      options: ["für", "auf", "zu", "an"],
+      sentence: "Ich warte _____ den Bus.",
+      answer: "auf"
+    },
+    {
+      id: "703dcfb9-ebfd-408c-886f-1f59a1cdfa67",
+      options: ["in", "auf", "an", "zu"],
+      sentence: "Meine Schwester studiert _____ der Universität.",
+      answer: "an"
+    }
+  ];
+
+  return questions;
+});
+'''
+

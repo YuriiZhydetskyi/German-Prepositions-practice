@@ -1,4 +1,6 @@
-define(['./config', './topicConfig'], function (config, topicConfig) {
+define(['./config', './topicConfig', 'UserConfigs'], function (config, topicConfig, UserConfigs) {
+    const userConfigs = new UserConfigs();
+
     const renderService = {
         renderQuestion: function (question, handleAnswerSelection) {
             let questionRenderModule = topicConfig[question.topic].questionRenderModule;
@@ -15,7 +17,7 @@ define(['./config', './topicConfig'], function (config, topicConfig) {
         renderFeedback: function (isCorrect, answer, currentQuestion, answerHistory) {
             let questionRenderModule = topicConfig[currentQuestion.topic].questionRenderModule;
 
-            if(!isCorrect){
+            if(!isCorrect && userConfigs.isVibrationEnabled()){
                 navigator.vibrate(200);
             }
 

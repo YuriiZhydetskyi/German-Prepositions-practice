@@ -1,5 +1,9 @@
-define(function () {
+define(['UserConfigs'], function (UserConfigs) {
     class VerbenUndNomenMitPraepositionenQuestionRender {
+        constructor() {
+            this.userConfigs = new UserConfigs();
+        }
+
         renderQuestion(question, handleAnswerSelection) {
             const questionElement = document.getElementById("question");
             questionElement.innerHTML = question.sentence.replace("_____", "<span class='blank'>_____</span>");
@@ -55,7 +59,9 @@ define(function () {
                 blankElement.classList.add("text-success", "font-weight-bold");
             }
 
-            this.speakText(questionElement.textContent);
+            if(this.userConfigs.isSoundEnabled()) {
+                this.speakText(questionElement.textContent);
+            }
         }
 
         speakText(text) {
