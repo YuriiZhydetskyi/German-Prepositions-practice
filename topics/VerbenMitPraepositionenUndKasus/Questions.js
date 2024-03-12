@@ -519,6 +519,496 @@ define(function () {
             "translationUkr": "Він попрощався зі своїми друзями.",
             "answer": "von + Dativ",
             "verb": "sich verabschieden"
+        },
+        {
+            "id": "5b51465d-de09-4653-b71a-12441b9b7e93",
+            "options": ["über + Akkusativ", "an + Dativ", "auf + Akkusativ", "für + Akkusativ"],
+            "sentence": "Wir arbeiten _____ (ein) neues Projekt.",
+            "resultSentence": "Wir arbeiten an einem neuen Projekt.",
+            "translation": "We are working on a new project.",
+            "translationUkr": "Ми працюємо над новим проектом.",
+            "answer": "an + Dativ",
+            "verb": "arbeiten"
+        },
+        {
+            "id": "63ea5402-43fc-4645-8055-d2534c0e81ee",
+            "options": ["von + Dativ", "mit + Dativ", "für + Akkusativ", "zu + Dativ"],
+            "sentence": "Der Lehrer antwortet _____ (die) Frage.",
+            "resultSentence": "Der Lehrer antwortet auf die Frage.",
+            "translation": "The teacher answers the question.",
+            "translationUkr": "Вчитель відповідає на запитання.",
+            "answer": "auf + Akkusativ",
+            "verb": "antworten"
+        },
+        {
+            "id": "ec723789-89b8-49bc-acf0-93c617d7c0a3",
+            "options": ["von + Dativ", "mit + Dativ", "an + Akkusativ", "zu + Dativ"],
+            "sentence": "Ich appelliere _____ (euer) Verständnis.",
+            "resultSentence": "Ich appelliere an euer Verständnis.",
+            "translation": "I appeal to your understanding.",
+            "translationUkr": "Я звертаюся до вашого розуміння.",
+            "answer": "an + Akkusativ",
+            "verb": "appellieren"
+        },
+        {
+            "id": "d78b8e1a-af00-417d-9e4e-f7ddad750050",
+            "options": ["von + Dativ", "mit + Dativ", "auf + Akkusativ", "für + Akkusativ"],
+            "sentence": "Der Arzt achtet _____ (die) Symptome.",
+            "resultSentence": "Der Arzt achtet auf die Symptome.",
+            "translation": "The doctor pays attention to the symptoms.",
+            "translationUkr": "Лікар звертає увагу на симптоми.",
+            "answer": "auf + Akkusativ",
+            "verb": "achten"
+        },
+        {
+            "id": "905db760-3fb3-440f-ba89-86de132298b9",
+            "options": ["über + Akkusativ", "an + Dativ", "auf + Akkusativ", "mit + Dativ"],
+            "sentence": "Der Chef ist _____ (seine) Mitarbeiter angewiesen.",
+            "resultSentence": "Der Chef ist auf seine Mitarbeiter angewiesen.",
+            "translation": "The boss relies on his employees.",
+            "translationUkr": "Бос покладається на своїх співробітників.",
+            "answer": "auf + Akkusativ",
+            "verb": "angewiesen sein"
+        },
+        {
+            "id": "fb2092cd-a3ce-4f38-ad3a-d6407fe7c406",
+            "options": ["von + Dativ", "mit + Dativ", "auf + Akkusativ", "für + Akkusativ"],
+            "sentence": "Die Kinder passen _____ (ihre) kleine Schwester auf.",
+            "resultSentence": "Die Kinder passen auf ihre kleine Schwester auf.",
+            "translation": "The children look after their little sister.",
+            "translationUkr": "Діти доглядають за своєю маленькою сестрою.",
+            "answer": "auf + Akkusativ",
+            "verb": "aufpassen"
+        },
+        {
+            "id": "52927ad5-c035-466f-9f6c-e8348bca6bba",
+            "options": ["von + Dativ", "mit + Dativ", "auf + Akkusativ", "für + Akkusativ"],
+            "sentence": "Ich bitte dich _____ (ein) Gefallen.",
+            "resultSentence": "Ich bitte dich um einen Gefallen.",
+            "translation": "I am asking you for a favor.",
+            "translationUkr": "Я прошу тебе про послугу.",
+            "answer": "um + Akkusativ",
+            "verb": "bitten"
+        },
+        {
+            "id": "037bc1e5-5992-442d-b4ef-e49574a0c5f4",
+            "options": ["von + Dativ", "mit + Dativ", "an + Akkusativ", "zu + Dativ"],
+            "sentence": "Er bedankt sich _____ (seine) Eltern.",
+            "resultSentence": "Er bedankt sich bei seinen Eltern.",
+            "translation": "He thanks his parents.",
+            "translationUkr": "Він дякує своїм батькам.",
+            "answer": "bei + Dativ",
+            "verb": "sich bedanken"
+        },
+        {
+            "id": "09998a61-a3fd-41be-a9c2-802cbdfc7c26",
+            "options": ["über + Akkusativ", "an + Dativ", "auf + Akkusativ", "mit + Dativ"],
+            "sentence": "Ich möchte mich _____ (die) Sache beteiligen.",
+            "resultSentence": "Ich möchte mich an der Sache beteiligen.",
+            "translation": "I would like to participate in the matter.",
+            "translationUkr": "Я хотів би взяти участь у цій справі.",
+            "answer": "an + Dativ",
+            "verb": "sich beteiligen"
+        },
+        {
+            "id": "fb049309-3872-4dff-a8d2-69051c4090c9",
+            "options": ["über + Akkusativ", "an + Dativ", "auf + Akkusativ", "mit + Dativ"],
+            "sentence": "Ich bitte Sie _____ (Ihre) Aufmerksamkeit.",
+            "resultSentence": "Ich bitte Sie um Ihre Aufmerksamkeit.",
+            "translation": "I ask for your attention.",
+            "translationUkr": "Прошу вашої уваги.",
+            "answer": "um + Akkusativ",
+            "verb": "bitten"
+        },
+        {
+            "id": "b10ca3ec-9306-4209-8bc5-aa21ff1bd883",
+            "options": ["von + Dativ", "mit + Dativ", "an + Akkusativ", "zu + Dativ"],
+            "sentence": "Er dankt _____ (die) Hilfe.",
+            "resultSentence": "Er dankt für die Hilfe.",
+            "translation": "He thanks for the help.",
+            "translationUkr": "Він дякує за допомогу.",
+            "answer": "für + Akkusativ",
+            "verb": "danken"
+        },
+        {
+            "id": "11fbeb07-eec8-4682-93be-b6e2e13aeec3",
+            "options": ["von + Dativ", "mit + Dativ", "an + Akkusativ", "zu + Dativ"],
+            "sentence": "Sie diskutieren _____ (das) Problem.",
+            "resultSentence": "Sie diskutieren über das Problem.",
+            "translation": "They discuss the problem.",
+            "translationUkr": "Вони обговорюють проблему.",
+            "answer": "über + Akkusativ",
+            "verb": "diskutieren"
+        },
+        {
+            "id": "e8b55e04-aaf7-498d-ade3-247c7ea8b7e3",
+            "options": ["von + Dativ", "mit + Dativ", "an + Akkusativ", "zu + Dativ"],
+            "sentence": "Ich warte _____ (mein) Freund.",
+            "resultSentence": "Ich warte auf meinen Freund.",
+            "translation": "I am waiting for my friend.",
+            "translationUkr": "Я чекаю на свого друга.",
+            "answer": "auf + Akkusativ",
+            "verb": "warten"
+        },
+        {
+            "id": "c791673d-5c14-4c91-95fa-7a17bce8ad2f",
+            "options": ["über + Akkusativ", "an + Dativ", "von + Dativ", "mit + Dativ"],
+            "sentence": "Die Studenten sind _____ (der) Professor begeistert.",
+            "resultSentence": "Die Studenten sind von dem Professor begeistert.",
+            "translation": "The students are excited about the professor.",
+            "translationUkr": "Студенти в захваті від професора.",
+            "answer": "von + Dativ",
+            "verb": "begeistert sein"
+        },
+        {
+            "id": "ef539a4c-47f1-4b8b-baa4-c09dc3471630",
+            "options": ["über + Akkusativ", "an + Dativ", "auf + Akkusativ", "mit + Dativ"],
+            "sentence": "Der Redner besteht _____ (seine) Meinung.",
+            "resultSentence": "Der Redner besteht auf seiner Meinung.",
+            "translation": "The speaker insists on his opinion.",
+            "translationUkr": "Доповідач наполягає на своїй думці.",
+            "answer": "auf + Dativ",
+            "verb": "bestehen"
+        },
+        {
+            "id": "36572256-868a-4142-b5e7-392f42797753",
+            "options": ["von + Dativ", "mit + Dativ", "an + Akkusativ", "zu + Dativ"],
+            "sentence": "Sie glaubt _____ (ein) Gott.",
+            "resultSentence": "Sie glaubt an einen Gott.",
+            "translation": "She believes in a god.",
+            "translationUkr": "Вона вірить у Бога.",
+            "answer": "an + Akkusativ",
+            "verb": "glauben"
+        },
+        {
+            "id": "e6f47c2d-5c3a-4c30-ab5b-033a55a47b60",
+            "options": ["von + Dativ", "mit + Dativ", "an + Akkusativ", "zu + Dativ"],
+            "sentence": "Wir denken oft _____ (die) Zukunft.",
+            "resultSentence": "Wir denken oft an die Zukunft.",
+            "translation": "We often think about the future.",
+            "translationUkr": "Ми часто думаємо про майбутнє.",
+            "answer": "an + Akkusativ",
+            "verb": "denken"
+        },
+        {
+            "id": "5cde1358-298f-4d8d-a4f9-4e27bb4d38b0",
+            "options": ["über + Akkusativ", "an + Dativ", "auf + Akkusativ", "mit + Dativ"],
+            "sentence": "Ich erinnere mich _____ (unser) letztes Treffen.",
+            "resultSentence": "Ich erinnere mich an unser letztes Treffen.",
+            "translation": "I remember our last meeting.",
+            "translationUkr": "Я пам'ятаю нашу останню зустріч.",
+            "answer": "an + Akkusativ",
+            "verb": "sich erinnern"
+        },
+        {
+            "id": "19045df5-e406-40e2-b526-d2bb30853866",
+            "options": ["über + Akkusativ", "an + Dativ", "auf + Akkusativ", "mit + Dativ"],
+            "sentence": "Er freut sich _____ (sein) Erfolg.",
+            "resultSentence": "Er freut sich über seinen Erfolg.",
+            "translation": "He is happy about his success.",
+            "translationUkr": "Він радіє своєму успіху.",
+            "answer": "über + Akkusativ",
+            "verb": "sich freuen"
+        },
+        {
+            "id": "7bf14ca2-78a8-4ad5-9586-a4e282bd8c5a",
+            "options": ["von + Dativ", "mit + Dativ", "an + Akkusativ", "zu + Dativ"],
+            "sentence": "Ich fürchte mich _____ (die) Dunkelheit.",
+            "resultSentence": "Ich fürchte mich vor der Dunkelheit.",
+            "translation": "I am afraid of the dark.",
+            "translationUkr": "Я боюся темряви.",
+            "answer": "vor + Dativ",
+            "verb": "sich fürchten"
+        },
+        {
+            "id": "9edc5ce8-27ff-4ce2-95f1-0ea3ae1c5fd2",
+            "options": ["über + Akkusativ", "an + Dativ", "auf + Akkusativ", "mit + Dativ"],
+            "sentence": "Er gewöhnt sich _____ (das) neue Leben.",
+            "resultSentence": "Er gewöhnt sich an das neue Leben.",
+            "translation": "He gets used to the new life.",
+            "translationUkr": "Він звикає до нового життя.",
+            "answer": "an + Akkusativ",
+            "verb": "sich gewöhnen"
+        },
+        {
+            "id": "07925d02-ab61-4bc4-8256-87f0b05b5cd7",
+            "options": ["von + Dativ", "mit + Dativ", "an + Akkusativ", "zu + Dativ"],
+            "sentence": "Ich gratuliere dir _____ (dein) Geburtstag.",
+            "resultSentence": "Ich gratuliere dir zu deinem Geburtstag.",
+            "translation": "I congratulate you on your birthday.",
+            "translationUkr": "Я вітаю тебе з днем народження.",
+            "answer": "zu + Dativ",
+            "verb": "gratulieren"
+        },
+        {
+            "id": "847eff6c-1d10-413a-b471-5e0c3de18015",
+            "options": ["von + Dativ", "mit + Dativ", "an + Akkusativ", "zu + Dativ"],
+            "sentence": "Er hält _____ (seine) Prinzipien fest.",
+            "resultSentence": "Er hält an seinen Prinzipien fest.",
+            "translation": "He sticks to his principles.",
+            "translationUkr": "Він дотримується своїх принципів.",
+            "answer": "an + Dativ",
+            "verb": "festhalten"
+        },
+        {
+            "id": "a888bdc1-082f-4414-8dd9-8192465949cd",
+            "options": ["über + Akkusativ", "an + Dativ", "auf + Akkusativ", "mit + Dativ"],
+            "sentence": "Sie hofft _____ (ein) Wunder.",
+            "resultSentence": "Sie hofft auf ein Wunder.",
+            "translation": "She hopes for a miracle.",
+            "translationUkr": "Вона сподівається на диво.",
+            "answer": "auf + Akkusativ",
+            "verb": "hoffen"
+        },
+        {
+            "id": "bca88450-88e3-48fc-aeaf-952fb6f8cc6b",
+            "options": ["von + Dativ", "mit + Dativ", "an + Akkusativ", "zu + Dativ"],
+            "sentence": "Das Kind hängt _____ (seine) Mutter.",
+            "resultSentence": "Das Kind hängt an seiner Mutter.",
+            "translation": "The child is attached to his mother.",
+            "translationUkr": "Дитина прив'язана до своєї матері.",
+            "answer": "an + Dativ",
+            "verb": "hängen"
+        },
+        {
+            "id": "221405e0-d70e-4d98-ad49-24f12c37670e",
+            "options": ["von + Dativ", "mit + Dativ", "an + Akkusativ", "für + Akkusativ"],
+            "sentence": "Ich interessiere mich _____ (die) Kunst.",
+            "resultSentence": "Ich interessiere mich für die Kunst.",
+            "translation": "I am interested in art.",
+            "translationUkr": "Я цікавлюся мистецтвом.",
+            "answer": "für + Akkusativ",
+            "verb": "sich interessieren"
+        },
+        {
+            "id": "91820e13-f5f4-480c-9831-e44d709a6dfb",
+            "options": ["von + Dativ", "mit + Dativ", "an + Akkusativ", "zu + Dativ"],
+            "sentence": "Er kämpft _____ (seine) Überzeugungen.",
+            "resultSentence": "Er kämpft für seine Überzeugungen.",
+            "translation": "He fights for his beliefs.",
+            "translationUkr": "Він бореться за свої переконання.",
+            "answer": "für + Akkusativ",
+            "verb": "kämpfen"
+        },
+        {
+            "id": "1fca83ff-4b4b-4b09-a714-bb1df45f2a1f",
+            "options": ["von + Dativ", "mit + Dativ", "an + Akkusativ", "zu + Dativ"],
+            "sentence": "Ich kann mich _____ (sein) Namen nicht erinnern.",
+            "resultSentence": "Ich kann mich an seinen Namen nicht erinnern.",
+            "translation": "I can't remember his name.",
+            "translationUkr": "Я не можу згадати його ім'я.",
+            "answer": "an + Akkusativ",
+            "verb": "sich erinnern"
+        },
+        {
+            "id": "1b2ee700-75cf-4e74-bf11-93f14aaad0fc",
+            "options": ["von + Dativ", "mit + Dativ", "an + Akkusativ", "zu + Dativ"],
+            "sentence": "Er leidet _____ (eine) schwere Krankheit.",
+            "resultSentence": "Er leidet an einer schweren Krankheit.",
+            "translation": "He suffers from a serious illness.",
+            "translationUkr": "Він страждає від важкої хвороби.",
+            "answer": "an + Dativ",
+            "verb": "leiden"
+        },
+        {
+            "id": "767b5548-6578-43d8-bf07-3ab428972ec5",
+            "options": ["über + Akkusativ", "an + Dativ", "auf + Akkusativ", "mit + Dativ"],
+            "sentence": "Wir müssen _____ (eine) Lösung nachdenken.",
+            "resultSentence": "Wir müssen über eine Lösung nachdenken.",
+            "translation": "We need to think about a solution.",
+            "translationUkr": "Ми повинні подумати про рішення.",
+            "answer": "über + Akkusativ",
+            "verb": "nachdenken"
+        },
+        {
+            "id": "677972d4-ce52-467b-bc9a-f86027b0ea7b",
+            "options": ["von + Dativ", "mit + Dativ", "an + Akkusativ", "zu + Dativ"],
+            "sentence": "Er hat _____ (die) Prüfung teilgenommen.",
+            "resultSentence": "Er hat an der Prüfung teilgenommen.",
+            "translation": "He participated in the exam.",
+            "translationUkr": "Він брав участь в іспиті.",
+            "answer": "an + Dativ",
+            "verb": "teilnehmen"
+        },
+        {
+            "id": "23ae0be7-ebbe-491d-8d4d-7beec9a9175b",
+            "options": ["von + Dativ", "mit + Dativ", "an + Akkusativ", "zu + Dativ"],
+            "sentence": "Sie zweifelt _____ (sein) Ehrlichkeit.",
+            "resultSentence": "Sie zweifelt an seiner Ehrlichkeit.",
+            "translation": "She doubts his honesty.",
+            "translationUkr": "Вона сумнівається в його чесності.",
+            "answer": "an + Dativ",
+            "verb": "zweifeln"
+        },
+        {
+            "id": "3bebfca9-8688-4e6c-a203-9f710a0d6dbe",
+            "options": ["über + Akkusativ", "an + Dativ", "auf + Akkusativ", "mit + Dativ"],
+            "sentence": "Die Kinder freuen sich _____ (der) Ausflug.",
+            "resultSentence": "Die Kinder freuen sich auf den Ausflug.",
+            "translation": "The children are looking forward to the excursion.",
+            "translationUkr": "Діти з нетерпінням чекають на екскурсію.",
+            "answer": "auf + Akkusativ",
+            "verb": "sich freuen"
+        },
+        {
+            "id": "08e7a232-32bb-4502-839f-93b1fe33039e",
+            "options": ["von + Dativ", "mit + Dativ", "an + Akkusativ", "zu + Dativ"],
+            "sentence": "Ich bin _____ (dein) Besuch erfreut.",
+            "resultSentence": "Ich bin über deinen Besuch erfreut.",
+            "translation": "I am pleased about your visit.",
+            "translationUkr": "Я радий твоєму візиту.",
+            "answer": "über + Akkusativ",
+            "verb": "erfreut sein"
+        },
+        {
+            "id": "092234cc-1df6-42c7-afb8-e2b3e00ae5ab",
+            "options": ["von + Dativ", "mit + Dativ", "an + Akkusativ", "zu + Dativ"],
+            "sentence": "Er vertraut _____ (seine) Freunde.",
+            "resultSentence": "Er vertraut auf seine Freunde.",
+            "translation": "He trusts his friends.",
+            "translationUkr": "Він довіряє своїм друзям.",
+            "answer": "auf + Akkusativ",
+            "verb": "vertrauen"
+        },
+        {
+            "id": "d6f6ac59-c00b-4149-b2b4-470222fab21b",
+            "options": ["von + Dativ", "mit + Dativ", "an + Akkusativ", "zu + Dativ"],
+            "sentence": "Ich erinnere dich _____ (dein) Versprechen.",
+            "resultSentence": "Ich erinnere dich an dein Versprechen.",
+            "translation": "I remind you of your promise.",
+            "translationUkr": "Я нагадую тобі про твою обіцянку.",
+            "answer": "an + Akkusativ",
+            "verb": "erinnern"
+        },
+        {
+            "id": "686c7cea-c840-468e-9f17-ea0657eaf3dd",
+            "options": ["über + Akkusativ", "an + Dativ", "auf + Akkusativ", "mit + Dativ"],
+            "sentence": "Sie ist _____ (die) Situation verärgert.",
+            "resultSentence": "Sie ist über die Situation verärgert.",
+            "translation": "She is annoyed about the situation.",
+            "translationUkr": "Вона роздратована ситуацією.",
+            "answer": "über + Akkusativ",
+            "verb": "verärgert sein"
+        },
+        {
+            "id": "4038a419-241f-4da9-a1c2-40592ca8b809",
+            "options": ["von + Dativ", "mit + Dativ", "an + Akkusativ", "zu + Dativ"],
+            "sentence": "Er zweifelt _____ (der) Erfolg.",
+            "resultSentence": "Er zweifelt am Erfolg.",
+            "translation": "He doubts the success.",
+            "translationUkr": "Він сумнівається в успіху.",
+            "answer": "an + Dativ",
+            "verb": "zweifeln"
+        },
+        {
+            "id": "1cde6e34-d3a2-48a3-8945-9a0383d8fd35",
+            "options": ["über + Akkusativ", "an + Dativ", "auf + Akkusativ", "mit + Dativ"],
+            "sentence": "Sie bereitet sich _____ (die) Reise vor.",
+            "resultSentence": "Sie bereitet sich auf die Reise vor.",
+            "translation": "She prepares for the trip.",
+            "translationUkr": "Вона готується до поїздки.",
+            "answer": "auf + Akkusativ",
+            "verb": "sich vorbereiten"
+        },
+        {
+            "id": "391dfcb9-4f37-4383-90b2-8c3b3a6dd0e2",
+            "options": ["von + Dativ", "mit + Dativ", "an + Akkusativ", "zu + Dativ"],
+            "sentence": "Er entschuldigt sich _____ (sein) Fehler.",
+            "resultSentence": "Er entschuldigt sich für seinen Fehler.",
+            "translation": "He apologizes for his mistake.",
+            "translationUkr": "Він вибачається за свою помилку.",
+            "answer": "für + Akkusativ",
+            "verb": "sich entschuldigen"
+        },
+        {
+            "id": "ff8049fd-766a-42f5-a39d-cc038e72fdd7",
+            "options": ["von + Dativ", "mit + Dativ", "an + Akkusativ", "zu + Dativ"],
+            "sentence": "Ich bitte _____ (Ihre) Hilfe.",
+            "resultSentence": "Ich bitte um Ihre Hilfe.",
+            "translation": "I am asking for your help.",
+            "translationUkr": "Я прошу вашої допомоги.",
+            "answer": "um + Akkusativ",
+            "verb": "bitten"
+        },
+        {
+            "id": "4dc4147d-bdec-4498-bb6d-5e5e794b4b60",
+            "options": ["über + Akkusativ", "an + Dativ", "auf + Akkusativ", "mit + Dativ"],
+            "sentence": "Er träumt _____ (ein) besseres Leben.",
+            "resultSentence": "Er träumt von einem besseren Leben.",
+            "translation": "He dreams of a better life.",
+            "translationUkr": "Він мріє про краще життя.",
+            "answer": "von + Dativ",
+            "verb": "träumen"
+        },
+        {
+            "id": "e0bca0c4-184a-40f4-8135-8ad6b09d5fb9",
+            "options": ["von + Dativ", "mit + Dativ", "an + Akkusativ", "zu + Dativ"],
+            "sentence": "Ich bin _____ (das) Ergebnis zufrieden.",
+            "resultSentence": "Ich bin mit dem Ergebnis zufrieden.",
+            "translation": "I am satisfied with the result.",
+            "translationUkr": "Я задоволений результатом.",
+            "answer": "mit + Dativ",
+            "verb": "zufrieden sein"
+        },
+        {
+            "id": "1e1b4c42-4253-4724-a014-480c41db1b75",
+            "options": ["über + Akkusativ", "an + Dativ", "auf + Akkusativ", "mit + Dativ"],
+            "sentence": "Sie hält _____ (ihr) Versprechen.",
+            "resultSentence": "Sie hält an ihrem Versprechen fest.",
+            "translation": "She keeps her promise.",
+            "translationUkr": "Вона дотримується своєї обіцянки.",
+            "answer": "an + Dativ",
+            "verb": "festhalten"
+        },
+        {
+            "id": "8a65851e-320e-4c2b-8e8e-a201e9dfa968",
+            "options": ["von + Dativ", "mit + Dativ", "an + Akkusativ", "zu + Dativ"],
+            "sentence": "Er glaubt _____ (die) Liebe.",
+            "resultSentence": "Er glaubt an die Liebe.",
+            "translation": "He believes in love.",
+            "translationUkr": "Він вірить у любов.",
+            "answer": "an + Akkusativ",
+            "verb": "glauben"
+        },
+        {
+            "id": "0b26ca85-c909-4850-a5d6-8416e9452f6f",
+            "options": ["von + Dativ", "mit + Dativ", "an + Akkusativ", "zu + Dativ"],
+            "sentence": "Ich erinnere mich _____ (die) Vergangenheit.",
+            "resultSentence": "Ich erinnere mich an die Vergangenheit.",
+            "translation": "I remember the past.",
+            "translationUkr": "Я пам'ятаю минуле.",
+            "answer": "an + Akkusativ",
+            "verb": "sich erinnern"
+        },
+        {
+            "id": "8010eafd-ad16-44f3-8ee9-f8c2e09cd1a6",
+            "options": ["über + Akkusativ", "an + Dativ", "auf + Akkusativ", "mit + Dativ"],
+            "sentence": "Er verzichtet _____ (das) Rauchen.",
+            "resultSentence": "Er verzichtet auf das Rauchen.",
+            "translation": "He gives up smoking.",
+            "translationUkr": "Він відмовляється від куріння.",
+            "answer": "auf + Akkusativ",
+            "verb": "verzichten"
+        },
+        {
+            "id": "cadc0bd0-abea-4fe8-a364-5935bd1fdad2",
+            "options": ["von + Dativ", "mit + Dativ", "an + Akkusativ", "zu + Dativ"],
+            "sentence": "Ich denke oft _____ dich.",
+            "resultSentence": "Ich denke oft an dich.",
+            "translation": "I often think of you.",
+            "translationUkr": "Я часто думаю про тебе.",
+            "answer": "an + Akkusativ",
+            "verb": "denken"
+        },
+        {
+            "id": "5081614b-733b-4c05-8cb7-055d006ac3c4",
+            "options": ["über + Akkusativ", "an + Dativ", "auf + Akkusativ", "mit + Dativ"],
+            "sentence": "Sie arbeitet _____ (ein) neues Buch.",
+            "resultSentence": "Sie arbeitet an einem neuen Buch.",
+            "translation": "She is working on a new book.",
+            "translationUkr": "Вона працює над новою книгою.",
+            "answer": "an + Dativ",
+            "verb": "arbeiten"
         }
     ]
 
