@@ -14,6 +14,11 @@ define(function() {
       text: 'Pronomen und Reflexivpronomen',
       questionProviderModule: 'topics/PronomenUndReflexivpronomen/QuestionProvider',
       questionRenderModule: 'topics/PronomenUndReflexivpronomen/QuestionRender'
+    },
+    'WunscheUndTraume': {
+      text: 'Wünsche und Träume',
+      questionProviderModule: 'topics/WunscheUndTraume/QuestionProvider',
+      questionRenderModule: 'topics/WunscheUndTraume/QuestionRender'
     }
   };
   return topicConfig;
