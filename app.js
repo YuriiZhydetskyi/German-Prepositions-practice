@@ -74,8 +74,8 @@ define([
   }
 
   function handleTopicChange(event) {
-    const selectedTopic = event.detail;
-    const questionProviderModule = topicSelector.getQuestionProviderModule();
+    const selectedTopicName = event.detail;
+    const questionProviderModule = topicSelector.getQuestionProviderModule(selectedTopicName);
 
     requirejs([questionProviderModule], function (QuestionProvider) {
       isAnswered = false;
@@ -85,7 +85,7 @@ define([
     });
 
     // Update the title
-    const topicText = topicConfig[selectedTopic].text;
+    const topicText = topicConfig[selectedTopicName].text;
     document.getElementById("topic-title").textContent = topicText;
 
     let nextButton = document.getElementById("next");
@@ -104,11 +104,11 @@ define([
 
       initializeState();
 
-      const selectedTopic = topicSelector.getSelectedTopic();
-      const topicText = topicConfig[selectedTopic].text;
+      const selectedTopicName = topicSelector.getSelectedTopic();
+      const topicText = topicConfig[selectedTopicName].text;
       document.getElementById("topic-title").textContent = topicText;
 
-      const questionProviderModule = topicSelector.getQuestionProviderModule();
+      const questionProviderModule = topicSelector.getQuestionProviderModule(selectedTopicName);
 
       requirejs([questionProviderModule], function (QuestionProvider) {
         questionsProvider = new QuestionProvider(userProgressManager);

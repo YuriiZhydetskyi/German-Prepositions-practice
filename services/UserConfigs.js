@@ -22,7 +22,6 @@ define(['topicConfig'], function (topicConfig) {
         }
 
         getSelectedTopic() {
-            this.loadConfigs();
             return this.configs.selectedTopic;
         }
 

@@ -15,12 +15,12 @@ define(['UserConfigs'], function (UserConfigs) {
             }
         }
 
-        getQuestionProviderModule() {
-            return this.topicConfig[this.selectedTopic].questionProviderModule;
+        getQuestionProviderModule(topicName) {
+            return this.topicConfig[topicName].questionProviderModule;
         }
 
-        getQuestionRenderModule() {
-            return this.topicConfig[this.selectedTopic].questionRenderModule;
+        getQuestionRenderModule(topicName) {
+            return this.topicConfig[topicName].questionRenderModule;
         }
     }
 
