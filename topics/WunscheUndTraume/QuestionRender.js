@@ -43,8 +43,9 @@ define(['UserConfigs'], function (UserConfigs) {
             }
 
             let resultSentence = questionElement.textContent;
-            //remove everything what is in brackets and brackets itself from the result sentence
-            resultSentence = resultSentence.replace(/\(.*?\)/g, '');
+            // remove everything what is in brackets and brackets itself from the result sentence
+            resultSentence = resultSentence.replace(/\([^()]*\)/g, '');
+            resultSentence = resultSentence.replace(/\([^()]*\)/g, '');
 
             const explanationElement = document.getElementById("explanation");
             explanationElement.innerHTML = `
