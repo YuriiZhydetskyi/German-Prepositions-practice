@@ -17,8 +17,14 @@ define(['./config', './topicConfig', 'UserConfigs'], function (config, topicConf
         renderFeedback: function (isCorrect, answer, currentQuestion, answerHistory) {
             let questionRenderModule = topicConfig[currentQuestion.topic].questionRenderModule;
 
-            if(!isCorrect && userConfigs.isVibrationEnabled()){
-                navigator.vibrate(200);
+            try {
+                if (!isCorrect && userConfigs.isVibrationEnabled()) {
+                    if (!navigator.userAgent.includes('Safari')) {
+                        navigator.vibrate(200);
+                    }
+                }
+            } catch (error) {
+                console.error(error);
             }
 
             requirejs([questionRenderModule], function(QuestionRender) {
