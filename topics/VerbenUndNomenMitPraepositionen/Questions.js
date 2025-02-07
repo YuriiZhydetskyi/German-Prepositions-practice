@@ -21,7 +21,7 @@ define(function () {
     {
       id: "26746fa0-f224-437a-bcdb-e38bd5250885",
       options: ["in", "auf", "zu", "im"],
-      sentence: "Wir fahren _____ dem Urlaub.",
+      sentence: "Wir fahren _____ den Urlaub.",
       answer: "in"
     },
     {
@@ -67,12 +67,6 @@ define(function () {
       answer: "für"
     },
     {
-      id: "fb84c102-3835-4667-a8f6-70aa580311bb",
-      options: ["für", "zu", "an", "auf"],
-      sentence: "Meine Mutter kocht _____ dem Abendessen.",
-      answer: "für"
-    },
-    {
       id: "2f4722ac-fd71-4164-ba76-35f0c84c2468",
       options: ["in", "auf", "an", "zu"],
       sentence: "Wir gehen _____ den Park spazieren.",
@@ -83,12 +77,6 @@ define(function () {
       options: ["für", "auf", "an", "zu"],
       sentence: "Ich warte _____ meinen Freund.",
       answer: "auf"
-    },
-    {
-      id: "a0895f7c-2941-4f74-8e79-6c29726edff8",
-      options: ["in", "für", "an", "auf"],
-      sentence: "Mein Vater arbeitet _____ einer Firma.",
-      answer: "für"
     },
     {
       id: "da3138b3-9da8-44e6-b6e0-d42966ac9317",
@@ -127,12 +115,6 @@ define(function () {
       answer: "an"
     },
     {
-      id: "46db4d6d-adcd-4579-90d7-1199c029e895",
-      options: ["in", "für", "an", "auf"],
-      sentence: "Mein Bruder spielt _____ dem Fußballverein.",
-      answer: "für"
-    },
-    {
       id: "b837b869-1890-4eb5-aac1-a534593f85ae",
       options: ["für", "auf", "an", "zu"],
       sentence: "Wir warten _____ den Zug.",
@@ -163,21 +145,9 @@ define(function () {
       answer: "zu"
     },
     {
-      id: "a18e8772-0516-4d85-86d1-986b4eace9cc",
-      options: ["in", "auf", "an", "zu"],
-      sentence: "Mein Vater schaut _____ den Fernseher.",
-      answer: "auf"
-    },
-    {
       id: "96b37f4b-ec8d-469f-8d4e-a4257d8c1df9",
       options: ["auf", "in", "an", "zu"],
       sentence: "Wir sitzen _____ dem Boden.",
-      answer: "auf"
-    },
-    {
-      id: "bf9961f4-1064-4f59-ae8c-690b7f766220",
-      options: ["für", "auf", "zu", "an"],
-      sentence: "Ich höre _____ Musik.",
       answer: "auf"
     },
     {
@@ -209,12 +179,6 @@ define(function () {
       options: ["auf", "in", "an", "zu"],
       sentence: "Wir sitzen _____ dem Balkon.",
       answer: "auf"
-    },
-    {
-      id: "62813d30-a506-4cfa-b289-3b5071805f6d",
-      options: ["für", "bei", "an", "auf"],
-      sentence: "Ich rufe _____ die Feuerwehr an.",
-      answer: "bei"
     },
     {
       id: "a5a2da7f-df2d-4870-99fb-743848e3c3cf",
@@ -253,12 +217,6 @@ define(function () {
       answer: "an"
     },
     {
-      id: "ad00090d-6c23-46a8-b965-553832639506",
-      options: ["für", "zu", "an", "auf"],
-      sentence: "Meine Mutter kocht _____ dem Mittagessen.",
-      answer: "für"
-    },
-    {
       id: "8b4fd17e-d609-445f-9458-a82b7e72f820",
       options: ["in", "auf", "zu", "an"],
       sentence: "Wir gehen _____ die Apotheke.",
@@ -281,12 +239,6 @@ define(function () {
       options: ["in", "auf", "zu", "an"],
       sentence: "Wir fahren _____ die Berge.",
       answer: "in"
-    },
-    {
-      id: "2371bf49-accc-4099-b8c4-40c7ba49f595",
-      options: ["für", "zu", "an", "auf"],
-      sentence: "Ich arbeite _____ dem Abendessen.",
-      answer: "an"
     },
     {
       id: "ae40f56c-7d19-4ffd-8667-f780c553757c",
@@ -344,9 +296,9 @@ define(function () {
     },
     {
       id: "e02284a6-d932-4ee9-ab92-976c31859f62",
-      options: ["in", "auf", "zu", "an"],
-      sentence: "Ich fahre _____ die Schule.",
-      answer: "zur"
+      options: ["in die", "auf die", "zu der (zur)", "an der"],
+      sentence: "Ich fahre _____ (die) Schule.",
+      answer: "zu der (zur)"
     },
     {
       id: "f1418f8c-8aae-403b-a6dd-c0b4ffd11fb6",
@@ -398,9 +350,9 @@ define(function () {
     },
     {
       id: "e8720c60-e559-4de2-9ff0-82c0de4e8746",
-      options: ["in", "auf", "zu", "an"],
-      sentence: "Ich fahre _____ die Arbeit.",
-      answer: "zur"
+      options: ["in die", "auf der", "zur (zu der)", "an der"],
+      sentence: "Ich fahre _____ (die) Arbeit.",
+      answer: "zur (zu der)"
     },
     {
       id: "6bbbef3d-2f8b-4cdb-8a7a-aac66e400538",
@@ -577,12 +529,6 @@ define(function () {
       answer: "an"
     },
     {
-      id: "e32f97d8-02ca-4ee4-9df7-78df05a830f7",
-      options: ["in", "für", "an", "auf"],
-      sentence: "Mein Vater spielt _____ einem Fußballverein.",
-      answer: "für"
-    },
-    {
       id: "6c006ece-3f8e-4078-bdac-1dc17459cce2",
       options: ["für", "an", "auf", "zu"],
       sentence: "Ich denke _____ meine Hausaufgaben.",
@@ -656,9 +602,9 @@ define(function () {
     },
     {
       id: "350b09b5-aeb5-4d59-82b3-335901d68551",
-      options: ["in", "auf", "zu", "an"],
-      sentence: "Ich fahre _____ die Tankstelle.",
-      answer: "zur"
+      options: ["in die", "auf der", "zur (zu der)", "an der"],
+      sentence: "Ich fahre _____ (die) Tankstelle.",
+      answer: "zur (zu der)"
     },
     {
       id: "6c9ed759-7969-4c62-8e71-56a3dd84fe22",
@@ -710,21 +656,15 @@ define(function () {
     },
     {
       id: "8ee2552e-4576-4c06-ab8d-36f56c5ff644",
-      options: ["in", "auf", "zu", "an"],
-      sentence: "Ich fahre _____ die Universität.",
-      answer: "zur"
+      options: ["in die", "auf der", "zur (zu der)", "an der"],
+      sentence: "Ich fahre _____ (die) Universität.",
+      answer: "zur (zu der)"
     },
     {
       id: "b42ffb86-9121-4738-bca0-e79d7e333943",
       options: ["zum", "auf", "zu", "an"],
       sentence: "Wir gehen _____ Konzert.",
       answer: "zum"
-    },
-    {
-      id: "d19e7ef8-9d5a-493d-8001-e8a2c7070d3d",
-      options: ["in", "für", "an", "auf"],
-      sentence: "Mein Vater arbeitet _____ einer Firma.",
-      answer: "für"
     },
     {
       id: "e816b135-19ab-436f-bbe2-66c1f0574327",
@@ -761,12 +701,6 @@ define(function () {
       options: ["für", "auf", "an", "zu"],
       sentence: "Mein Bruder wartet _____ mich.",
       answer: "auf"
-    },
-    {
-      id: "a8d2627c-9f7e-43e4-b47d-76a239a2f4ea",
-      options: ["in", "auf", "zu", "an"],
-      sentence: "Ich fahre _____ die Schule.",
-      answer: "zur"
     },
     {
       id: "6bcc7ee8-f14a-4a01-bde0-09c69ee7701f",
