@@ -323,7 +323,7 @@ define(function () {
         {
             "id": "96513b15-1eca-41ea-93c1-814207b73a80",
             "options": ["von + Dativ", "mit + Dativ", "für + Akkusativ", "zu + Dativ"],
-            "sentence": "Ich beschäftige mich gerne _____ (meine) Kindern.",
+            "sentence": "Ich beschäftige mich gerne _____ (meinen) Kindern.",
             "resultSentence": "Ich beschäftige mich gerne mit meinen Kindern.",
             "translation": "I enjoy spending time with my children.",
             "translationUkr": "Я люблю проводити час зі своїми дітьми.",
@@ -481,16 +481,6 @@ define(function () {
             "verb": "sich überzeugen"
         },
         {
-            "id": "ae1381ce-446f-469b-8503-dc80bd1ed928",
-            "options": ["von + Dativ", "mit + Dativ", "für + Akkusativ", "zu + Dativ"],
-            "sentence": "Die Leute gehen entspannt _____ um.",
-            "resultSentence": "Die Leute gehen entspannt miteinander um.",
-            "translation": "People are relaxed with each other.",
-            "translationUkr": "Люди розслаблені один з одним.",
-            "answer": "miteinander",
-            "verb": "umgehen"
-        },
-        {
             "id": "1d50e381-b8c5-4c4a-82ad-53f9674852c2",
             "options": ["von + Dativ", "mit + Dativ", "bei + Dativ", "für + Akkusativ"],
             "sentence": "Wir unterstützen Sie _____ Problemen mit Ihren Nachbarn.",
@@ -582,7 +572,7 @@ define(function () {
         },
         {
             "id": "52927ad5-c035-466f-9f6c-e8348bca6bba",
-            "options": ["von + Dativ", "mit + Dativ", "auf + Akkusativ", "für + Akkusativ"],
+            "options": ["von + Dativ", "mit + Dativ", "um + Akkusativ", "für + Akkusativ"],
             "sentence": "Ich bitte dich _____ (ein) Gefallen.",
             "resultSentence": "Ich bitte dich um einen Gefallen.",
             "translation": "I am asking you for a favor.",
@@ -592,7 +582,7 @@ define(function () {
         },
         {
             "id": "037bc1e5-5992-442d-b4ef-e49574a0c5f4",
-            "options": ["von + Dativ", "mit + Dativ", "an + Akkusativ", "zu + Dativ"],
+            "options": ["von + Dativ", "mit + Dativ", "an + Akkusativ", "bei + Dativ"],
             "sentence": "Er bedankt sich _____ (seine) Eltern.",
             "resultSentence": "Er bedankt sich bei seinen Eltern.",
             "translation": "He thanks his parents.",
@@ -612,7 +602,7 @@ define(function () {
         },
         {
             "id": "fb049309-3872-4dff-a8d2-69051c4090c9",
-            "options": ["über + Akkusativ", "an + Dativ", "auf + Akkusativ", "mit + Dativ"],
+            "options": ["über + Akkusativ", "um + Akkusativ", "auf + Akkusativ", "mit + Dativ"],
             "sentence": "Ich bitte Sie _____ (Ihre) Aufmerksamkeit.",
             "resultSentence": "Ich bitte Sie um Ihre Aufmerksamkeit.",
             "translation": "I ask for your attention.",
@@ -622,7 +612,7 @@ define(function () {
         },
         {
             "id": "b10ca3ec-9306-4209-8bc5-aa21ff1bd883",
-            "options": ["von + Dativ", "mit + Dativ", "an + Akkusativ", "zu + Dativ"],
+            "options": ["für + Akkusativ", "mit + Dativ", "an + Akkusativ", "zu + Dativ"],
             "sentence": "Er dankt _____ (die) Hilfe.",
             "resultSentence": "Er dankt für die Hilfe.",
             "translation": "He thanks for the help.",
@@ -642,7 +632,7 @@ define(function () {
         },
         {
             "id": "e8b55e04-aaf7-498d-ade3-247c7ea8b7e3",
-            "options": ["von + Dativ", "mit + Dativ", "an + Akkusativ", "zu + Dativ"],
+            "options": ["von + Dativ", "auf + Akkusativ", "an + Akkusativ", "zu + Dativ"],
             "sentence": "Ich warte _____ (mein) Freund.",
             "resultSentence": "Ich warte auf meinen Freund.",
             "translation": "I am waiting for my friend.",
@@ -712,7 +702,7 @@ define(function () {
         },
         {
             "id": "7bf14ca2-78a8-4ad5-9586-a4e282bd8c5a",
-            "options": ["von + Dativ", "mit + Dativ", "an + Akkusativ", "zu + Dativ"],
+            "options": ["vor + Dativ", "mit + Dativ", "an + Akkusativ", "zu + Dativ"],
             "sentence": "Ich fürchte mich _____ (die) Dunkelheit.",
             "resultSentence": "Ich fürchte mich vor der Dunkelheit.",
             "translation": "I am afraid of the dark.",
@@ -782,7 +772,7 @@ define(function () {
         },
         {
             "id": "91820e13-f5f4-480c-9831-e44d709a6dfb",
-            "options": ["von + Dativ", "mit + Dativ", "an + Akkusativ", "zu + Dativ"],
+            "options": ["von + Dativ", "für + Akkusativ", "an + Akkusativ", "zu + Dativ"],
             "sentence": "Er kämpft _____ (seine) Überzeugungen.",
             "resultSentence": "Er kämpft für seine Überzeugungen.",
             "translation": "He fights for his beliefs.",
@@ -852,7 +842,7 @@ define(function () {
         },
         {
             "id": "08e7a232-32bb-4502-839f-93b1fe33039e",
-            "options": ["von + Dativ", "mit + Dativ", "an + Akkusativ", "zu + Dativ"],
+            "options": ["über + Akkusativ", "mit + Dativ", "an + Akkusativ", "zu + Dativ"],
             "sentence": "Ich bin _____ (dein) Besuch erfreut.",
             "resultSentence": "Ich bin über deinen Besuch erfreut.",
             "translation": "I am pleased about your visit.",
@@ -862,7 +852,7 @@ define(function () {
         },
         {
             "id": "092234cc-1df6-42c7-afb8-e2b3e00ae5ab",
-            "options": ["von + Dativ", "mit + Dativ", "an + Akkusativ", "zu + Dativ"],
+            "options": ["von + Dativ", "auf + Akkusativ", "an + Akkusativ", "zu + Dativ"],
             "sentence": "Er vertraut _____ (seine) Freunde.",
             "resultSentence": "Er vertraut auf seine Freunde.",
             "translation": "He trusts his friends.",
@@ -912,7 +902,7 @@ define(function () {
         },
         {
             "id": "391dfcb9-4f37-4383-90b2-8c3b3a6dd0e2",
-            "options": ["von + Dativ", "mit + Dativ", "an + Akkusativ", "zu + Dativ"],
+            "options": ["für + Akkusativ", "mit + Dativ", "an + Akkusativ", "zu + Dativ"],
             "sentence": "Er entschuldigt sich _____ (sein) Fehler.",
             "resultSentence": "Er entschuldigt sich für seinen Fehler.",
             "translation": "He apologizes for his mistake.",
@@ -922,7 +912,7 @@ define(function () {
         },
         {
             "id": "ff8049fd-766a-42f5-a39d-cc038e72fdd7",
-            "options": ["von + Dativ", "mit + Dativ", "an + Akkusativ", "zu + Dativ"],
+            "options": ["von + Dativ", "um + Akkusativ", "an + Akkusativ", "zu + Dativ"],
             "sentence": "Ich bitte _____ (Ihre) Hilfe.",
             "resultSentence": "Ich bitte um Ihre Hilfe.",
             "translation": "I am asking for your help.",

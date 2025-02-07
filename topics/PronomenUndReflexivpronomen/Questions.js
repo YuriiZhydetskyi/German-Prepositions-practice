@@ -123,7 +123,7 @@ define(function () {
         {
             "id": "5f9f8238-cc44-4d04-aea6-55c7899d2583",
             "options": ["ihr", "sie", "ihre", "sich"],
-            "sentence": "Sie liebt _____ (sie (singular) + A) sehr.",
+            "sentence": "Er liebt _____ (sie (singular) + A) sehr.",
             "translation": "He loves her very much.",
             "translationUkr": "Він дуже її любить.",
             "answer": "sie",
